@@ -1,0 +1,22 @@
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Optimization scripts
+optimize_assets.py
+update_html_refs.py
+analyze_sizes.py
+optimize_seo_html.py
+fix_seo_scope.py
+update_html.py
+
+# Backups and temporary files
+backup_originals/
+*.tmp
+*.log
+temp_*
