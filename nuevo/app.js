@@ -407,10 +407,6 @@
     // nav
     nav.classList.toggle('solid', y > vh - 90);
     document.body.classList.toggle('in-hero', y < vh * .6);
-    const inPlans = innerWidth <= 1080 && showcases.some(sc => { const r = sc.list.getBoundingClientRect(); return r.top < vh && r.bottom > 0; }); // en móvil la foto se pega bajo el menú
-    nav.classList.toggle('hide', y > lastY + 2 && y > vh * 1.3 && !inPlans && !document.body.classList.contains('menu-open'));
-    if (inPlans) nav.classList.remove('hide');
-    if (y < lastY - 2) nav.classList.remove('hide');
     lastY = y;
     // hero parallax
     if (!reduce && y < vh * 1.2) {
