@@ -37,6 +37,12 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gut); }
 
+/* Tarjetas apiladas: cada sección se queda fija y la siguiente sube encima */
+.panel { background: var(--bg); }
+main > .panel { position: sticky; top: 0; transform-origin: 50% 0; }
+main > .panel::after { content: ""; position: absolute; inset: 0; background: #060607; opacity: var(--dim, 0); pointer-events: none; z-index: 60; }
+.stats-sec { padding: clamp(60px, 8vw, 100px) 0; }
+
 /* Tipografía */
 .d { font-family: var(--f-d); font-weight: 500; text-transform: uppercase; letter-spacing: .015em; line-height: .95; }
 .d-xl { font-size: clamp(52px, 7.4vw, 124px); }
@@ -150,7 +156,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .sound:hover { background: var(--y); color: var(--ink); border-color: var(--y); }
 
 /* ─── STATEMENT ─── */
-.statement { padding: clamp(110px, 16vw, 210px) 0; text-align: center; }
+.statement { padding: clamp(110px, 16vw, 210px) 0; text-align: center; min-height: 100vh; min-height: 100svh; display: flex; align-items: center; }
+.statement .wrap { width: 100%; }
 .statement p { font-size: clamp(24px, 3vw, 42px); line-height: 1.3; letter-spacing: -.02em; max-width: 30ch; margin: 0 auto; }
 .statement .w { color: #d5d5d1; transition: color .4s; }
 .statement .w.on { color: var(--ink); }

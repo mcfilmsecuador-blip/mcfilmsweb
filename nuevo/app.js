@@ -296,7 +296,7 @@
   // Barra flotante (móvil)
   const mini = $('#mini');
   const vis = { card: false, sum: false };
-  const updMini = () => { const on = vis.card && !vis.sum && innerWidth <= 1080; mini.classList.toggle('show', on); document.body.classList.toggle('mini-on', on); };
+  const updMini = () => { const on = vis.card && !vis.sum && innerWidth <= 1080 && $('#nosotros').getBoundingClientRect().top > innerHeight * .6; mini.classList.toggle('show', on); document.body.classList.toggle('mini-on', on); };
   new IntersectionObserver(es => es.forEach(e => { vis.card = e.isIntersecting; updMini(); })).observe($('.b-card'));
   new IntersectionObserver(es => es.forEach(e => { vis.sum = e.isIntersecting; updMini(); })).observe($('.summary'));
   mini.addEventListener('click', () => goTo('.summary'));
@@ -365,28 +365,49 @@
     // hero parallax
     if (!reduce && y < vh * 1.2) {
       const k = y / vh;
-      heroMedia.style.transform = `translate3d(0,${y * .35}px,0) scale(${1 + k * .08})`;
-      heroCopy.style.transform = `translate3d(0,${-y * .18}px,0)`;
-      heroCopy.style.opacity = clamp(1 - k * 1.6);
+      heroMedia.style.transform = `scale(${1 + k * .06})`;
+      heroCopy.style.transform = `translate3d(0,${-y * .25}px,0)`;
+      heroCopy.style.opacity = clamp(1 - k * 1.8);
     }
+    updMini();
+    // tarjetas apiladas
+    if (!reduce) panels.forEach((pn, i) => {
+      const next = panels[i + 1];
+      const nt = next ? next.getBoundingClientRect().top : vh;
+      const k = clamp((vh - nt) / vh);
+      const cov = nt <= 0; // tapada por completo: se oculta para no gastar batería
+      if (cov !== !!pn._cov) { pn._cov = cov; pn.style.visibility = cov ? 'hidden' : ''; }
+      if (k > 0.001) {
+        pn.style.setProperty('--dim', (k * .72).toFixed(3));
+        pn.style.transform = `scale(${(1 - k * .06).toFixed(4)})`;
+        pn.style.transformOrigin = `50% ${-pn._top + vh / 2}px`;
+      } else if (pn.style.transform) { pn.style.removeProperty('--dim'); pn.style.transform = ''; }
+      if (i > 0) {
+        const t = pn.getBoundingClientRect().top;
+        const rr = t > 0 && t < vh ? Math.round(28 * clamp(t / (vh * .5))) : 0;
+        pn.style.clipPath = rr ? `inset(0 round ${rr}px ${rr}px 0 0)` : '';
+      }
+    });
+    if (hv.src) { if ($('#hero')._cov) hv.pause(); else if (hv.paused && !document.hidden) hv.play().catch(() => {}); }
+    if (band._cov && !bandV.paused) bandV.pause();
     // statement
     const r = st.getBoundingClientRect();
-    const lit = Math.round(clamp((vh * .82 - r.top) / (r.height + vh * .3)) * words.length);
+    const lit = Math.round(clamp((vh * .95 - r.top) / (vh * .75)) * words.length);
     words.forEach((w, i) => w.classList.toggle('on', i < lit));
     // parallax imágenes
     if (!reduce) pars.forEach(im => { const b = im.parentElement.getBoundingClientRect(); if (b.bottom > 0 && b.top < vh) im.style.transform = `translate3d(0,${(b.top + b.height / 2 - vh / 2) * -.12}px,0)`; });
     // películas horizontales
     if (desktop()) {
       const fr = filmsSec.getBoundingClientRect();
-      const p = clamp(-fr.top / (fr.height - vh));
+      const p = clamp(-fr.top / (filmsSec.offsetHeight - vh));
       const dist = track.scrollWidth - innerWidth;
       track.style.transform = `translate3d(${-p * dist}px,0,0)`;
       fBar.style.transform = `scaleX(${p})`;
-      if (fr.top < vh && fr.bottom > 0) setFilm(Math.round(p * (films.length - 1)));
+      if (fr.top < vh && fr.bottom > 0 && !filmsSec._cov) setFilm(Math.round(p * (films.length - 1)));
       else if (activeFilm > -1) { films.forEach(f => $('video', f).pause()); activeFilm = -1; }
     } else {
       const fr = filmsSec.getBoundingClientRect();
-      if (fr.top < vh * .7 && fr.bottom > vh * .3) { if (activeFilm < 0) setFilm(0); }
+      if (fr.top < vh * .7 && fr.bottom > vh * .3 && !filmsSec._cov) { if (activeFilm < 0) setFilm(0); }
       else if (activeFilm > -1) { films.forEach(f => $('video', f).pause()); activeFilm = -1; }
     }
     // planes: activo según posición
@@ -403,7 +424,11 @@
     }
   };
   addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
-  addEventListener('resize', onScroll);
+  const panels = $$('main > .panel');
+  const setTops = () => panels.forEach(pn => { pn._top = Math.min(0, innerHeight - pn.offsetHeight); pn.style.top = pn._top + 'px'; });
+  addEventListener('resize', () => { setTops(); onScroll(); });
+  addEventListener('load', setTops);
+  new ResizeObserver(setTops).observe(document.querySelector('main'));
 
   /* Formulario */
   $('#form').addEventListener('submit', e => {
@@ -421,5 +446,6 @@
   renderPlans('bodas');
   onHrs();
   observeAll();
+  setTops();
   onScroll();
 })();

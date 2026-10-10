@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="img/lago-s.webp" imagesrcset="img/lago-s.webp 1100w, img/lago.webp 2400w" imagesizes="100vw" fetchpriority="high">
-<link rel="stylesheet" href="styles.css?v=1791604715">
+<link rel="stylesheet" href="styles.css?v=1791605349">
 
 <script type="application/ld+json">
 {
@@ -124,7 +124,7 @@
 <main id="top">
 
 <!-- HERO: video a pantalla completa -->
-<section class="hero" id="hero">
+<section class="panel hero" id="hero">
   <div class="hero-media" id="hero-media">
     <img src="img/lago-s.webp" srcset="img/lago-s.webp 1100w, img/lago.webp 2400w" sizes="100vw" alt="Novios abrazados junto a una laguna en el páramo de Ecuador, fotografía de boda MCFILMS" fetchpriority="high">
     <video id="hero-video" muted loop playsinline preload="none" aria-hidden="true"></video>
@@ -147,14 +147,14 @@
 </section>
 
 <!-- STATEMENT -->
-<section class="statement">
+<section class="panel statement">
   <div class="wrap">
     <p id="statement">No documentamos bodas. Las dirigimos como cine: cada mirada, cada abrazo, cada <span class="hl">lágrima</span> contada con la belleza que tu historia merece.</p>
   </div>
 </section>
 
 <!-- EDITORIAL -->
-<section class="ed" aria-label="Momentos">
+<section class="panel ed" aria-label="Momentos">
   <figure>
     <div class="ed-full clip" id="ed-full"><picture><source media="(max-width: 760px)" srcset="img/altar-s.webp"><img src="img/catedral-s.webp" srcset="img/catedral-s.webp 1100w, img/catedral.webp 2400w" sizes="100vw" alt="Novios en la Catedral de Cuenca, fotografía de boda MCFILMS" loading="lazy" data-par></picture></div>
     <figcaption class="wrap ed-cap">
@@ -178,7 +178,7 @@
 </section>
 
 <!-- BANDA + REEL -->
-<section class="band" aria-label="Reel">
+<section class="panel band" aria-label="Reel">
   <div class="wrap">
     <h2 class="d d-l split"><span class="ln"><span>Cada boda,</span></span><span class="ln"><span>una película</span></span></h2>
     <p class="sub rv">Mira nuestro reel con sonido.</p>
@@ -190,7 +190,7 @@
 </section>
 
 <!-- PELÍCULAS -->
-<section class="films" id="peliculas">
+<section class="panel films" id="peliculas">
   <div class="films-pin">
     <div class="wrap films-head">
       <div>
@@ -205,16 +205,16 @@
 </section>
 
 <!-- CIFRAS -->
-<section class="wrap" aria-label="Cifras">
-  <div class="stats rv">
+<section class="panel stats-sec" aria-label="Cifras">
+  <div class="wrap"><div class="stats rv">
     <div class="stat"><div class="stat-n" data-count="720">0</div><div class="stat-t">Bodas filmadas</div></div>
     <div class="stat"><div class="stat-n" data-count="11">0</div><div class="stat-t">Años contando historias</div></div>
     <div class="stat"><div class="stat-n" data-count="500" data-suf="K" data-pre="1">0</div><div class="stat-t">Fotos entregadas</div></div>
-  </div>
+  </div></div>
 </section>
 
 <!-- PLANES -->
-<section class="sec" id="planes">
+<section class="panel sec" id="planes">
   <div class="wrap">
     <div class="sec-head">
       <div>
@@ -241,7 +241,7 @@
 </section>
 
 <!-- ARMA TU PLAN -->
-<section class="sec builder-sec" id="arma-tu-plan">
+<section class="panel sec builder-sec" id="arma-tu-plan">
   <div class="wrap">
     <div class="sec-head">
       <div>
@@ -298,7 +298,7 @@
 </section>
 
 <!-- NOSOTROS -->
-<section class="sec" id="nosotros">
+<section class="panel sec" id="nosotros">
   <div class="wrap">
     <div class="about">
       <div class="about-pic clip"><img src="img/amigos-s.webp" alt="Novio y amigos riendo antes de la boda" loading="lazy"></div>
@@ -314,7 +314,7 @@
 </section>
 
 <!-- TESTIMONIOS -->
-<section class="sec" style="padding-top:0" aria-label="Testimonios">
+<section class="panel sec" aria-label="Testimonios">
   <div class="wrap sec-head">
     <div>
       <span class="eyebrow rv">Parejas</span>
@@ -325,7 +325,7 @@
 </section>
 
 <!-- INSTAGRAM + PODCAST -->
-<section class="sec" style="padding-top:0" aria-label="Redes y podcast">
+<section class="panel sec" aria-label="Redes y podcast">
   <div class="wrap social">
     <div class="ig rv">
       <div class="ig-head">
@@ -348,7 +348,7 @@
 </section>
 
 <!-- PROVEEDORES -->
-<section class="sec" id="proveedores" style="padding-top:0">
+<section class="panel sec" id="proveedores">
   <div class="wrap">
     <div class="sec-head">
       <div>
@@ -370,7 +370,7 @@
 </section>
 
 <!-- FAQ -->
-<section class="sec" style="padding-top:0" aria-label="Preguntas frecuentes">
+<section class="panel sec" aria-label="Preguntas frecuentes">
   <div class="wrap faq-grid">
     <div>
       <span class="eyebrow rv">Preguntas frecuentes</span>
@@ -387,7 +387,7 @@
 </section>
 
 <!-- CONTACTO -->
-<section class="sec contact" id="contacto">
+<section class="panel sec contact" id="contacto">
   <div class="wrap ct">
     <div>
       <span class="eyebrow rv">Contacto</span>
@@ -466,6 +466,6 @@
 </div>
 
 <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
-<script src="app.js?v=1791604715" defer></script>
+<script src="app.js?v=1791605349" defer></script>
 </body>
 </html>
