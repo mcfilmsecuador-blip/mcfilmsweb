@@ -2,11 +2,11 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>MCFILMS · Fotografía y Video de Bodas en Ecuador | Cuenca, Quito, Guayaquil</title>
-<meta name="description" content="Fotografía y cinematografía de bodas en Ecuador desde 2015. Más de 720 bodas en Cuenca, Quito, Guayaquil y destino. Arma tu plan y reserva tu fecha con MCFILMS.">
+<meta name="description" content="Fotografía y cinematografía de bodas en Ecuador desde 2015. Más de 720 bodas en Cuenca, Quito, Guayaquil y destino. Mira nuestros planes, arma el tuyo y reserva tu fecha.">
 <meta name="robots" content="noindex, nofollow"><!-- VISTA PREVIA: quitar al publicar -->
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#0b0b0c">
 <link rel="canonical" href="https://mcfilmsecuador.com/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_EC">
@@ -14,15 +14,15 @@
 <meta property="og:title" content="MCFILMS · Fotografía y Video de Bodas en Ecuador">
 <meta property="og:description" content="Contamos historias. Cine y fotografía de bodas desde 2015 · Cuenca, Quito, Guayaquil y destino.">
 <meta property="og:url" content="https://mcfilmsecuador.com/">
-<meta property="og:image" content="https://mcfilmsecuador.com/Portafolio%201/1.webp">
+<meta property="og:image" content="https://mcfilmsecuador.com/nuevo/img/lago.webp">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" href="../Mcfilms%20Isotipos/M%20Fondo%20Blanco.png">
 <link rel="apple-touch-icon" href="../Mcfilms%20Isotipos/M%20Fondo%20Blanco.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="../Portafolio%201/1.webp" fetchpriority="high">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="img/lago-s.webp" imagesrcset="img/lago-s.webp 1100w, img/lago.webp 2400w" imagesizes="100vw" fetchpriority="high">
 <link rel="stylesheet" href="styles.css">
 
 <script type="application/ld+json">
@@ -38,7 +38,7 @@
       "description": "Estudio de fotografía y cinematografía de bodas en Ecuador desde 2015. Cobertura en Cuenca, Quito, Guayaquil y bodas destino.",
       "url": "https://mcfilmsecuador.com/",
       "logo": "https://mcfilmsecuador.com/Mcfilms%20Isotipos/M%20Fondo%20Blanco.png",
-      "image": "https://mcfilmsecuador.com/Portafolio%201/1.webp",
+      "image": "https://mcfilmsecuador.com/nuevo/img/lago.webp",
       "telephone": "+593998400211",
       "email": "info@mcfilmsecuador.com",
       "priceRange": "$$$",
@@ -74,169 +74,194 @@
         {"@type": "Question", "name": "¿Cuánto cuesta la fotografía y video de una boda en Ecuador con MCFILMS?", "acceptedAnswer": {"@type": "Answer", "text": "Nuestros planes de foto y video para bodas van desde $949 + IVA (5 horas) hasta $1,649 + IVA (10 horas, Plan Diamante). También puedes armar tu propio plan en nuestra web."}},
         {"@type": "Question", "name": "¿Trabajan fuera de Cuenca?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. Tenemos base en Cuenca y cubrimos bodas en Quito, Guayaquil, Loja, Manta y todo el Ecuador, además de bodas destino."}},
         {"@type": "Question", "name": "¿Con cuánta anticipación debo reservar mi fecha?", "acceptedAnswer": {"@type": "Answer", "text": "Recomendamos reservar entre 6 y 12 meses antes, sobre todo para fechas en temporada alta. Escríbenos por WhatsApp para confirmar disponibilidad."}},
-        {"@type": "Question", "name": "¿Usan drone en las bodas?", "acceptedAnswer": {"@type": "Answer", "text": "Sí, todos nuestros planes de boda incluyen tomas y vuelo con drone."}}
+        {"@type": "Question", "name": "¿Usan drone en las bodas?", "acceptedAnswer": {"@type": "Answer", "text": "Sí, todos nuestros planes de boda incluyen tomas y vuelo con drone."}},
+        {"@type": "Question", "name": "¿Cómo recibo mis fotos y videos?", "acceptedAnswer": {"@type": "Answer", "text": "Te entregamos todo en un enlace digital, además de acceso a nuestra web con tu portafolio privado para elegir las fotos de tu álbum."}}
       ]
     }
   ]
 }
 </script>
 </head>
-<body>
+<body class="loading">
 
-<div class="progress" id="progress"></div>
-<div class="cursor" id="cursor" aria-hidden="true"></div>
+<!-- LOADER -->
+<div id="loader" aria-hidden="true">
+  <svg viewBox="0 0 108 70"><path fill-rule="evenodd" d="M0 0L54 22.5L108 0V70H94V42.33L54 59L14 42.33V70H0ZM14 18.33L54 35L94 18.33V30.83L54 47.5L14 30.83Z"/></svg>
+  <div class="l-word"><span>MCFILMS</span></div>
+  <div class="l-num" id="l-num">000</div>
+</div>
 
 <!-- NAV -->
 <header class="nav" id="nav">
+  <button class="menu-btn" id="menu-btn" aria-label="Abrir menú" aria-expanded="false"><i></i><span>Menú</span></button>
   <a href="#top" class="nav-logo" aria-label="MCFILMS inicio">
-    <img src="../Mcfilms%20Logos/Mcfilms%20Negro.png" alt="MCFILMS" width="120" height="26">
+    <img class="lw" src="../Mcfilms%20Logos/Mcfilms%20Blanco.png" alt="MCFILMS" height="28">
+    <img class="lk" src="../Mcfilms%20Logos/Mcfilms%20Negro.png" alt="" height="28">
   </a>
-  <nav class="nav-links" aria-label="Principal">
-    <a href="#portafolio">Portafolio</a>
-    <a href="#planes">Planes</a>
-    <a href="#arma-tu-plan">Arma tu plan</a>
-    <a href="#nosotros">Nosotros</a>
-    <a href="#proveedores">Proveedores</a>
-  </nav>
-  <a class="btn btn-y" href="#contacto">Reservar fecha</a>
-  <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span></button>
+  <div class="nav-r">
+    <a class="txt" href="#planes">Planes</a>
+    <a class="btn btn-y" href="#contacto">Reservar</a>
+  </div>
 </header>
-<nav class="mnav" id="mnav" aria-label="Menú móvil">
-  <a href="#portafolio">Portafolio</a>
-  <a href="#planes">Planes</a>
-  <a href="#arma-tu-plan">Arma tu plan</a>
-  <a href="#nosotros">Nosotros</a>
-  <a href="#proveedores">Proveedores</a>
-  <a href="#contacto">Contacto</a>
-</nav>
+
+<div class="menu" id="menu">
+  <nav aria-label="Menú">
+    <a href="#peliculas"><span>Películas</span><small>01</small></a>
+    <a href="#planes"><span>Planes</span><small>02</small></a>
+    <a href="#arma-tu-plan"><span>Arma tu plan</span><small>03</small></a>
+    <a href="#nosotros"><span>Nosotros</span><small>04</small></a>
+    <a href="#proveedores"><span>Proveedores</span><small>05</small></a>
+    <a href="#contacto"><span>Contacto</span><small>06</small></a>
+  </nav>
+  <div class="menu-pic"><img src="img/retrato-velo-s.webp" alt="" loading="lazy"></div>
+  <div class="menu-foot">
+    <a href="mailto:info@mcfilmsecuador.com">info@mcfilmsecuador.com</a>
+    <a href="https://wa.me/593998400211" target="_blank" rel="noopener">+593 99 840 0211</a>
+    <a href="https://www.instagram.com/mcfilms_ecuador/" target="_blank" rel="noopener">@mcfilms_ecuador</a>
+  </div>
+</div>
 
 <main id="top">
 
-<!-- HERO -->
-<section class="hero">
-  <div class="wrap">
-    <div class="hero-top">
-      <h1>
-        <span class="ln"><span>Contamos</span></span>
-        <span class="ln"><span class="serif">historias.</span></span>
-      </h1>
-      <div class="hero-side">
-        <p>Fotografía y cine de bodas en Ecuador. Dirigimos cada momento para que tu boda se sienta como una película que vas a querer ver toda la vida.</p>
-        <div class="row">
-          <a class="btn btn-k" href="#arma-tu-plan">Arma tu plan <span class="arr">→</span></a>
-          <a class="btn btn-o" href="#portafolio">Ver películas</a>
-        </div>
-      </div>
-    </div>
-    <div class="hero-sub">
-      <span>Desde 2015</span><span class="dot"></span><span>Cuenca · Quito · Guayaquil</span><span class="dot"></span><span>+720 bodas</span>
+<!-- HERO: video a pantalla completa -->
+<section class="hero" id="hero">
+  <div class="hero-media" id="hero-media">
+    <img src="img/lago-s.webp" srcset="img/lago-s.webp 1100w, img/lago.webp 2400w" sizes="100vw" alt="Novios abrazados junto a una laguna en el páramo de Ecuador, fotografía de boda MCFILMS" fetchpriority="high">
+    <video id="hero-video" muted loop playsinline preload="none" aria-hidden="true"></video>
+  </div>
+  <div class="hero-copy" id="hero-copy">
+    <span class="eyebrow fx">Fotografía y cine de bodas · Ecuador</span>
+    <h1 class="d"><span class="ln"><span>Contamos</span></span><span class="ln"><span>historias</span></span></h1>
+    <div class="hero-ctas fx">
+      <a class="btn btn-w" href="#planes">Ver planes</a>
+      <a class="link" href="#peliculas">Ver películas</a>
     </div>
   </div>
+  <div class="hero-meta">
+    <span>Desde 2015 · Cuenca · Quito · Guayaquil</span>
+    <span class="scroll"><i></i>Desliza</span>
+    <button class="sound" id="sound" aria-label="Activar sonido">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="m23 9-6 6M17 9l6 6"/></svg>
+    </button>
+  </div>
+</section>
 
-  <div class="reel" id="reel">
-    <div class="reel-sticky">
-      <div class="reel-frame" id="reel-frame">
-        <img src="../Portafolio%201/1.webp" alt="Pareja de novios en su boda filmada por MCFILMS" fetchpriority="high">
-        <video id="hero-video" muted loop playsinline preload="none" poster="../Portafolio%201/1.webp" aria-label="Reel de bodas MCFILMS">
-          <source data-src="../Videos%20Web/7.mp4" type="video/mp4">
-        </video>
-        <div class="reel-cap">
-          <div><span>Reel 2026</span><br><b>Hecho con amor, filmado como cine.</b></div>
-          <button class="sound" id="sound" aria-label="Activar sonido">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="m23 9-6 6M17 9l6 6"/></svg>
-          </button>
-        </div>
-      </div>
+<!-- STATEMENT -->
+<section class="statement">
+  <div class="wrap">
+    <p id="statement">No documentamos bodas. Las dirigimos como cine: cada mirada, cada abrazo, cada <span class="hl">lágrima</span> contada con la belleza que tu historia merece.</p>
+  </div>
+</section>
+
+<!-- EDITORIAL -->
+<section class="ed" aria-label="Momentos">
+  <figure>
+    <div class="ed-full clip" id="ed-full"><img src="img/catedral-s.webp" srcset="img/catedral-s.webp 1100w, img/catedral.webp 2400w" sizes="100vw" alt="Novios frente a la Catedral de Cuenca de noche" loading="lazy" data-par></div>
+    <figcaption class="wrap ed-cap">
+      <p class="cap rv"><b style="color:var(--ink)">Cuenca, de noche.</b> Las cúpulas de la Catedral Nueva como testigo. Buscamos la luz que solo existe una vez.</p>
+      <p class="cap rv d1">Fotografía · Cine · Drone</p>
+    </figcaption>
+  </figure>
+
+  <div class="wrap">
+    <div class="ed-pair">
+      <figure class="rv">
+        <div class="pic"><img src="img/abrazo-velo-s.webp" alt="Novia y novio bajo el velo en un bosque" loading="lazy" width="1100" height="734"></div>
+        <figcaption><b>El instante</b><p class="cap">Dirigimos sin que se note. Ustedes viven su día; nosotros cuidamos cada encuadre.</p></figcaption>
+      </figure>
+      <figure class="rv d2">
+        <div class="pic"><img src="img/retrato-velo-s.webp" alt="Retrato de novia con velo y tiara" loading="lazy" width="1100" height="1649"></div>
+        <figcaption><b>El detalle</b><p class="cap">Retratos con luz natural, color cinematográfico y la emoción intacta.</p></figcaption>
+      </figure>
     </div>
   </div>
 </section>
 
-<!-- MANIFIESTO -->
-<section class="manifesto">
+<!-- BANDA + REEL -->
+<section class="band" aria-label="Reel">
   <div class="wrap">
-    <p id="manifesto">No documentamos bodas. Las <span class="serif">dirigimos</span> como cine: cada mirada, cada abrazo, cada <span class="hl">lágrima</span> contada con la belleza que merece.</p>
+    <h2 class="d d-l split"><span class="ln"><span>Cada boda,</span></span><span class="ln"><span>una película</span></span></h2>
+    <p class="sub rv">Mira nuestro reel con sonido.</p>
+  </div>
+  <a class="band-reel" id="band-reel" href="#" data-src="../Videos%20Web/1.mp4" aria-label="Reproducir reel MCFILMS">
+    <video muted loop playsinline preload="none" poster="img/petalos-s.webp" data-src="../Videos%20Web/6.mp4"></video>
+    <span class="play-sq"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4v16l13-8z"/></svg></span>
+  </a>
+</section>
+
+<!-- PELÍCULAS -->
+<section class="films" id="peliculas">
+  <div class="films-pin">
+    <div class="wrap films-head">
+      <div>
+        <span class="eyebrow rv">Películas</span>
+        <h2 class="d d-l split" style="margin-top:16px"><span class="ln"><span>Historias reales</span></span></h2>
+      </div>
+      <div class="films-count"><b id="f-now">01</b> / <span id="f-tot">06</span></div>
+    </div>
+    <div class="track" id="track"></div>
+    <div class="films-bar"><i id="f-bar"></i></div>
   </div>
 </section>
 
-<!-- STATS -->
+<!-- CIFRAS -->
 <section class="wrap" aria-label="Cifras">
   <div class="stats rv">
     <div class="stat"><div class="stat-n" data-count="720">0</div><div class="stat-t">Bodas filmadas</div></div>
     <div class="stat"><div class="stat-n" data-count="11">0</div><div class="stat-t">Años contando historias</div></div>
-    <div class="stat"><div class="stat-n" data-count="500" data-suf="K"><i>+</i>0</div><div class="stat-t">Fotos entregadas</div></div>
-  </div>
-</section>
-
-<!-- PORTAFOLIO -->
-<section class="sec" id="portafolio">
-  <div class="port sec">
-    <div class="wrap sec-head center">
-      <span class="eyebrow rv">Portafolio</span>
-      <h2 class="h-l split">
-        <span class="ln"><span>Momentos que</span></span>
-        <span class="ln"><span>se quedan <span class="serif mark">para siempre</span></span></span>
-      </h2>
-    </div>
-    <div class="marquee-wrap" aria-label="Galería de fotos de bodas">
-      <div class="marquee" id="mq1"></div>
-      <div class="marquee rev" id="mq2"></div>
-    </div>
-    <div class="wrap">
-      <div class="sec-head">
-        <span class="eyebrow rv">Películas</span>
-        <h3 class="h-m split"><span class="ln"><span>Elige una y <span class="serif">dale play.</span></span></span></h3>
-      </div>
-      <div class="films" id="films"></div>
-    </div>
+    <div class="stat"><div class="stat-n" data-count="500" data-suf="K" data-pre="1">0</div><div class="stat-t">Fotos entregadas</div></div>
   </div>
 </section>
 
 <!-- PLANES -->
-<section class="sec" id="planes" style="padding-top:0">
+<section class="sec" id="planes">
   <div class="wrap">
-    <div class="sec-head center">
-      <span class="eyebrow rv">Planes 2026</span>
-      <h2 class="h-l split">
-        <span class="ln"><span>Elige tu</span></span>
-        <span class="ln"><span><span class="serif">experiencia.</span></span></span>
-      </h2>
-      <p class="lead rv d1">Todos los planes incluyen foto y video cinematográfico, drone y entrega digital. Precios en USD.</p>
-      <div class="tabs rv d2" id="tabs" role="tablist">
-        <span class="tab-pill" id="tab-pill"></span>
-        <button class="tab on" data-g="bodas" role="tab">Bodas</button>
-        <button class="tab" data-g="quince" role="tab">Quinceaños</button>
-        <button class="tab" data-g="destino" role="tab">Destino</button>
-        <button class="tab" data-g="espejo" role="tab">Espejo mágico</button>
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow rv">Planes 2026</span>
+        <h2 class="d d-l split"><span class="ln"><span>Elige tu</span></span><span class="ln"><span>experiencia</span></span></h2>
+        <p class="lead rv d1">Foto y video cinematográfico, drone y entrega digital en todos los planes. Desliza para recorrer cada plan.</p>
+      </div>
+      <div class="cats rv d2" id="cats" role="tablist">
+        <button class="cat on" data-g="bodas" role="tab">Bodas</button>
+        <button class="cat" data-g="quince" role="tab">Quinceaños</button>
+        <button class="cat" data-g="destino" role="tab">Destino</button>
+        <button class="cat" data-g="espejo" role="tab">Espejo mágico</button>
       </div>
     </div>
-    <div class="plans" id="plans"></div>
-    <p class="plans-note">¿Ningún plan encaja exacto? <a href="#arma-tu-plan" style="text-decoration:underline;text-underline-offset:3px">Arma el tuyo</a> en 30 segundos.</p>
+    <div class="plans">
+      <ol class="p-list" id="p-list"></ol>
+      <div class="p-stage">
+        <div class="stage" id="stage"><div class="stage-chip"><b id="st-name"></b><span id="st-meta"></span></div></div>
+        <div class="stage-dots" id="stage-dots"></div>
+      </div>
+    </div>
+    <p class="plans-note">¿Ningún plan encaja exacto? <a href="#arma-tu-plan">Arma el tuyo en 30 segundos</a>.</p>
   </div>
 </section>
 
 <!-- ARMA TU PLAN -->
-<section class="sec" id="arma-tu-plan" style="background:var(--bg2)">
+<section class="sec builder-sec" id="arma-tu-plan">
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow rv">Arma tu plan</span>
-      <h2 class="h-l split">
-        <span class="ln"><span>Tu boda,</span></span>
-        <span class="ln"><span><span class="serif">a tu medida.</span></span></span>
-      </h2>
-      <p class="lead rv d1">Elige lo que necesitas y mira tu inversión en tiempo real. Al final te lo enviamos por WhatsApp o correo.</p>
+      <div>
+        <span class="eyebrow rv">Arma tu plan</span>
+        <h2 class="d d-l split"><span class="ln"><span>A tu medida</span></span></h2>
+        <p class="lead rv d1">Elige lo que necesitas y mira tu inversión al instante. Al final te lo enviamos por WhatsApp o correo.</p>
+      </div>
     </div>
 
     <div class="builder">
       <div class="b-card rv">
         <div class="b-step">
-          <div class="b-label"><b>1 · ¿Qué celebras?</b><span>Paso 1 de 4</span></div>
+          <div class="b-label"><b>01 · ¿Qué celebras?</b><span>Paso 1 de 4</span></div>
           <div class="seg" style="--c:2" data-k="evento">
             <button class="opt on" data-v="boda"><b>Boda</b><small>Civil, religiosa o destino</small></button>
             <button class="opt" data-v="quince"><b>Quinceaños</b><small>Sesión + fiesta</small></button>
           </div>
         </div>
         <div class="b-step">
-          <div class="b-label"><b>2 · ¿Qué servicio?</b><span>Paso 2 de 4</span></div>
+          <div class="b-label"><b>02 · Servicio</b><span>Paso 2 de 4</span></div>
           <div class="seg" style="--c:3" data-k="servicio">
             <button class="opt on" data-v="fv"><b>Foto + Video</b><small>La experiencia completa</small></button>
             <button class="opt" data-v="foto"><b>Solo foto</b><small>Fotografía artística</small></button>
@@ -244,27 +269,27 @@
           </div>
         </div>
         <div class="b-step">
-          <div class="b-label"><b>3 · Horas de cobertura</b><span>Paso 3 de 4</span></div>
+          <div class="b-label"><b>03 · Horas de cobertura</b><span>Paso 3 de 4</span></div>
           <div class="range-wrap">
-            <div class="range-val"><span id="hrs-v">7</span><small>h</small></div>
+            <div class="range-val"><span id="hrs-v">7</span><small>H</small></div>
             <input type="range" id="hrs" min="5" max="12" step="1" value="7" aria-label="Horas de cobertura">
           </div>
         </div>
         <div class="b-step">
-          <div class="b-label"><b>4 · Extras</b><span>Paso 4 de 4</span></div>
+          <div class="b-label"><b>04 · Extras</b><span>Paso 4 de 4</span></div>
           <div class="extras" id="extras"></div>
         </div>
       </div>
 
-      <button class="mini" id="mini" aria-label="Ver resumen de tu plan"><span>Tu plan</span><b id="mini-total">$0</b><span>Ver →</span></button>
+      <button class="mini" id="mini" aria-label="Ver resumen de tu plan"><span>Tu plan</span><b id="mini-total">$0</b><span>Ver</span></button>
       <aside class="summary rv d1" aria-live="polite">
         <div class="sum-k">Tu inversión estimada</div>
-        <div class="sum-total">$<span id="total">0</span> <small>+ IVA</small></div>
+        <div class="sum-total">$<span id="total">0</span><small>+ IVA</small></div>
         <ul class="sum-list" id="sum-list"></ul>
         <div class="sum-tip" id="sum-tip"></div>
         <div class="sum-actions">
-          <a class="btn btn-y" id="send-wa" href="#" target="_blank" rel="noopener">Enviar por WhatsApp <span class="arr">→</span></a>
-          <a class="btn btn-o" id="send-mail" href="#contacto">Recibir por correo</a>
+          <a class="btn btn-y" id="send-wa" href="#" target="_blank" rel="noopener">Enviar por WhatsApp</a>
+          <a class="btn btn-l" id="send-mail" href="#contacto">Recibir por correo</a>
         </div>
         <p class="sum-note">Valor referencial. Confirmamos disponibilidad y precio final contigo.</p>
       </aside>
@@ -276,16 +301,12 @@
 <section class="sec" id="nosotros">
   <div class="wrap">
     <div class="about">
-      <div class="sec-head" style="margin:0">
+      <div class="about-pic clip"><img src="img/amigos-s.webp" alt="Novio y amigos riendo antes de la boda" loading="lazy"></div>
+      <div>
         <span class="eyebrow rv">Nosotros</span>
-        <h2 class="h-l split">
-          <span class="ln"><span>Dos hermanos,</span></span>
-          <span class="ln"><span>una <span class="serif mark">obsesión.</span></span></span>
-        </h2>
-      </div>
-      <div class="rv d1">
-        <p>MCFILMS nació en 2015 del sueño de José Andrés y Javier Mercado: llevar el lenguaje del cine a la boda más importante, la tuya.</p>
-        <p>Con base en Cuenca, viajamos a Quito, Guayaquil y a donde tu historia lo necesite, con drones cinema, cámaras 4K, sonido profesional, Magic Mirror y cabina 360.</p>
+        <h2 class="d d-l split" style="margin-top:18px"><span class="ln"><span>Dos hermanos,</span></span><span class="ln"><span>una obsesión</span></span></h2>
+        <p class="lead rv d1">MCFILMS nació en 2015 del sueño de José Andrés y Javier Mercado: llevar el lenguaje del cine a la boda más importante, la tuya.</p>
+        <p class="lead rv d2">Con base en Cuenca, viajamos a Quito, Guayaquil y a donde tu historia lo necesite, con drones cinema, cámaras 4K, sonido profesional, Magic Mirror y cabina 360.</p>
       </div>
     </div>
     <div class="team" id="team"></div>
@@ -293,12 +314,14 @@
 </section>
 
 <!-- TESTIMONIOS -->
-<section class="sec" style="padding-top:0;overflow:hidden" aria-label="Testimonios">
+<section class="sec" style="padding-top:0" aria-label="Testimonios">
   <div class="wrap sec-head">
-    <span class="eyebrow rv">Parejas</span>
-    <h2 class="h-m split"><span class="ln"><span>Lo que dicen <span class="serif">después de verla.</span></span></span></h2>
+    <div>
+      <span class="eyebrow rv">Parejas</span>
+      <h2 class="d d-m split"><span class="ln"><span>Lo que dicen después de verla</span></span></h2>
+    </div>
   </div>
-  <div class="quotes" id="quotes"></div>
+  <div class="quotes-wrap"><div class="quotes" id="quotes"></div></div>
 </section>
 
 <!-- INSTAGRAM + PODCAST -->
@@ -310,13 +333,13 @@
           <div class="ig-av"><img src="../Mcfilms%20Isotipos/M%20Fondo%20Blanco.png" alt="" width="54" height="54"></div>
           <div><b>@mcfilms_ecuador</b><span>Lo último de nuestras bodas</span></div>
         </div>
-        <a class="btn btn-k" href="https://www.instagram.com/mcfilms_ecuador/" target="_blank" rel="noopener" style="height:44px;padding:0 18px;font-size:14.5px">Seguir</a>
+        <a class="btn btn-k" href="https://www.instagram.com/mcfilms_ecuador/" target="_blank" rel="noopener">Seguir</a>
       </div>
       <div class="ig-grid" id="ig-grid"></div>
     </div>
     <div class="pod rv d1">
       <span class="eyebrow">Podcast · Próximamente</span>
-      <h3>Detrás de las <span class="serif">bodas.</span></h3>
+      <h3 class="d d-l">Detrás de las bodas</h3>
       <p>Historias reales, proveedores, nervios y risas: todo lo que no se ve el gran día.</p>
       <div class="wave" aria-hidden="true"></div>
       <a class="btn btn-k" href="https://www.instagram.com/mcfilms_ecuador/" target="_blank" rel="noopener">Avísame del estreno</a>
@@ -324,38 +347,37 @@
   </div>
 </section>
 
-<!-- DIRECTORIO DE PROVEEDORES -->
+<!-- PROVEEDORES -->
 <section class="sec" id="proveedores" style="padding-top:0">
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow rv">Directorio de proveedores</span>
-      <h2 class="h-l split">
-        <span class="ln"><span>Los aliados de</span></span>
-        <span class="ln"><span>tu <span class="serif">gran día.</span></span></span>
-      </h2>
-      <p class="lead rv d1">Salones, planners, música, maquillaje y más. Proveedores con quienes hemos trabajado y recomendamos.</p>
+      <div>
+        <span class="eyebrow rv">Directorio de proveedores</span>
+        <h2 class="d d-l split"><span class="ln"><span>Aliados de</span></span><span class="ln"><span>tu gran día</span></span></h2>
+        <p class="lead rv d1">Salones, planners, música, maquillaje y más. Proveedores con quienes hemos trabajado y recomendamos.</p>
+      </div>
     </div>
     <div class="dir-bar rv">
       <label class="search">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-        <input type="search" id="dir-q" placeholder="Buscar proveedor…" aria-label="Buscar proveedor">
+        <input type="search" id="dir-q" placeholder="Buscar proveedor" aria-label="Buscar proveedor">
       </label>
       <div class="chips" id="chips"></div>
     </div>
     <div class="dir" id="dir"></div>
-    <div class="dir-more"><button class="btn btn-o" id="dir-more">Ver más proveedores</button></div>
+    <div class="dir-more"><button class="btn btn-l" id="dir-more">Ver más proveedores</button></div>
   </div>
 </section>
 
 <!-- FAQ -->
 <section class="sec" style="padding-top:0" aria-label="Preguntas frecuentes">
-  <div class="wrap">
-    <div class="sec-head center">
+  <div class="wrap faq-grid">
+    <div>
       <span class="eyebrow rv">Preguntas frecuentes</span>
-      <h2 class="h-m split"><span class="ln"><span>Lo que todos <span class="serif">preguntan.</span></span></span></h2>
+      <h2 class="d d-m split" style="margin-top:18px"><span class="ln"><span>Lo que todos</span></span><span class="ln"><span>preguntan</span></span></h2>
     </div>
     <div class="faq rv">
-      <details><summary>¿Cuánto cuesta la fotografía y video de una boda?</summary><p>Nuestros planes de foto y video para bodas van desde $949 + IVA (5 horas) hasta $1,649 + IVA (10 horas, Plan Diamante). También puedes armar tu propio plan arriba y ver el valor al instante.</p></details>
+      <details><summary>¿Cuánto cuesta la fotografía y video de una boda?</summary><p>Nuestros planes de foto y video para bodas van desde $949 + IVA (5 horas) hasta $1,649 + IVA (10 horas, Plan Diamante). También puedes armar tu propio plan y ver el valor al instante.</p></details>
       <details><summary>¿Trabajan fuera de Cuenca?</summary><p>Sí. Tenemos base en Cuenca y cubrimos bodas en Quito, Guayaquil, Loja, Manta y todo el Ecuador, además de bodas destino.</p></details>
       <details><summary>¿Con cuánta anticipación debo reservar?</summary><p>Recomendamos reservar entre 6 y 12 meses antes, sobre todo en temporada alta. Escríbenos por WhatsApp para confirmar tu fecha.</p></details>
       <details><summary>¿Usan drone?</summary><p>Sí, todos nuestros planes de boda incluyen tomas y vuelo con drone.</p></details>
@@ -368,14 +390,9 @@
 <section class="sec contact" id="contacto">
   <div class="wrap ct">
     <div>
-      <div class="sec-head" style="margin:0">
-        <span class="eyebrow rv">Contacto</span>
-        <h2 class="h-l split">
-          <span class="ln"><span>Cuéntanos tu</span></span>
-          <span class="ln"><span><span class="serif mark" style="color:#fff">historia.</span></span></span>
-        </h2>
-        <p class="lead rv d1">La fecha, el lugar y la emoción que quieren guardar para siempre. Respondemos en menos de 24 horas.</p>
-      </div>
+      <span class="eyebrow rv">Contacto</span>
+      <h2 class="d d-l split" style="margin-top:18px"><span class="ln"><span>Cuéntanos</span></span><span class="ln"><span>tu historia</span></span></h2>
+      <p class="lead rv d1" style="margin-top:22px">La fecha, el lugar y la emoción que quieren guardar para siempre. Respondemos en menos de 24 horas.</p>
       <div class="ct-info rv d2">
         <div><small>WhatsApp</small><a href="https://wa.me/593998400211" target="_blank" rel="noopener">+593 99 840 0211</a></div>
         <div><small>Correo</small><a href="mailto:info@mcfilmsecuador.com">info@mcfilmsecuador.com</a></div>
@@ -410,13 +427,14 @@
           <option>Quinceaños</option>
           <option>Boda destino</option>
           <option>Espejo mágico / Video 360</option>
+          <option>Plan armado en la web</option>
           <option>No sé aún, quiero asesoría</option>
         </select>
         <label for="f-plan">Plan de interés</label>
       </div>
-      <div class="field full"><textarea id="f-msg" name="mensaje" placeholder=" " rows="5"></textarea><label for="f-msg">Cuéntanos de su boda</label></div>
-      <button class="btn btn-y" type="submit">Enviar mensaje <span class="arr">→</span></button>
-      <div class="form-ok" id="form-ok">¡Gracias! Recibimos tu mensaje y te escribiremos muy pronto.</div>
+      <div class="field full"><textarea id="f-msg" name="mensaje" placeholder=" " rows="4"></textarea><label for="f-msg">Cuéntanos de su boda</label></div>
+      <button class="btn btn-y" type="submit">Enviar mensaje</button>
+      <div class="form-ok" id="form-ok">Gracias. Recibimos tu mensaje y te escribiremos muy pronto.</div>
     </form>
   </div>
 </section>
@@ -425,9 +443,9 @@
 
 <footer class="foot">
   <div class="wrap">
-    <div class="foot-big" aria-hidden="true">MCFILMS <span class="serif">ec.</span></div>
+    <div class="foot-big" aria-hidden="true">MCFILMS<span>.</span></div>
     <div class="foot-row">
-      <span>© <span id="yr">2026</span> MCFILMS Ecuador · Fotografía y video de bodas</span>
+      <span>© <span id="yr">2026</span> MCFILMS Ecuador · Fotografía y video de bodas · Cuenca</span>
       <nav aria-label="Pie">
         <a href="#planes">Planes</a>
         <a href="#proveedores">Proveedores</a>
@@ -447,6 +465,7 @@
   <video id="modal-v" controls playsinline></video>
 </div>
 
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
 <script src="app.js" defer></script>
 </body>
 </html>
