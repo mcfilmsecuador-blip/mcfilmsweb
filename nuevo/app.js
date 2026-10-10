@@ -67,11 +67,11 @@
   ];
 
   const TEAM = [
-    { n: 'José Andrés Mercado', r: 'Gerente General · Co-fundador', img: 'team-jose2', bio: 'Visionario y arquitecto del sueño que dio vida a MCFILMS en 2015. Más de diez años liderando producciones audiovisuales con mirada de cine, y la convicción de que cada boda merece tratarse como una obra.', tags: ['Dirección', 'Estrategia', 'Desde 2015'] },
-    { n: 'Javier Mercado', r: 'Director Creativo · Co-fundador', img: 'team-javier', bio: 'El alma creativa de MCFILMS. Define el estilo narrativo que convierte cada boda en una pieza cinematográfica: el ritmo, la música, el color y esa emoción que te hace volver a verla una y otra vez.', tags: ['Narrativa', 'Edición', 'Color'] },
+    { n: 'José Andrés Mercado', r: 'Gerente General · Co-fundador', img: 'team-jose2-v2', bio: 'Visionario y arquitecto del sueño que dio vida a MCFILMS en 2015. Más de diez años liderando producciones audiovisuales con mirada de cine, y la convicción de que cada boda merece tratarse como una obra.', tags: ['Dirección', 'Estrategia', 'Desde 2015'] },
+    { n: 'Javier Mercado', r: 'Director Creativo · Co-fundador', img: 'team-javier-v2', bio: 'El alma creativa de MCFILMS. Define el estilo narrativo que convierte cada boda en una pieza cinematográfica: el ritmo, la música, el color y esa emoción que te hace volver a verla una y otra vez.', tags: ['Narrativa', 'Edición', 'Color'] },
     { n: 'David Balseca', r: 'Director de Fotografía', img: 'team-david', bio: 'Guardián de nuestro lenguaje visual. Ojo clínico para la luz, la composición y el color; lidera la fotografía y la postproducción que definen la estética premium de cada álbum.', tags: ['Fotografía', 'Luz', 'Retoque'] },
-    { n: 'Bryan Espinoza', r: 'Director de Video', img: 'team-bryan', bio: 'Mirada fresca, técnica y cinematográfica. Cuida la composición, el movimiento y la luz para que cada película se sienta auténtica, dinámica y memorable.', tags: ['Cámara', 'Drone', 'Movimiento'] },
-    { n: 'Andrea Mercado', r: 'Directora de Operaciones', img: 'team-andrea', bio: 'El pilar que hace que todo funcione. Coordina equipos, tiempos y entregas para que tu experiencia sea impecable desde la primera reunión hasta que recibes tu película.', tags: ['Coordinación', 'Entregas', 'Atención'] }
+    { n: 'Bryan Espinoza', r: 'Director de Video', img: 'team-bryan-v2', bio: 'Mirada fresca, técnica y cinematográfica. Cuida la composición, el movimiento y la luz para que cada película se sienta auténtica, dinámica y memorable.', tags: ['Cámara', 'Drone', 'Movimiento'] },
+    { n: 'Andrea Mercado', r: 'Directora de Operaciones', img: 'team-andrea-v2', bio: 'El pilar que hace que todo funcione. Coordina equipos, tiempos y entregas para que tu experiencia sea impecable desde la primera reunión hasta que recibes tu película.', tags: ['Coordinación', 'Entregas', 'Atención'] }
   ];
 
   // ⚠️ Reemplazar por reseñas reales de clientes (Google / Instagram)
