@@ -362,6 +362,18 @@ input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 
 .ig-btns .btn { height: 46px; padding: 0 22px; font-size: 15px; }
 .pod-sec .pod { min-height: 0; }
 
+/* Cifras sobre muro de fotos */
+.wall-sec { height: 220vh; }
+.wall-pin { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; display: grid; place-items: center; }
+.wall { transform: rotate(6deg); }
+.wall .ig-col span { aspect-ratio: 4 / 5; border-radius: 20px; overflow: hidden; display: block; background: var(--bg2); }
+.wall .ig-col img { width: 100%; height: 100%; object-fit: cover; }
+.wall-card { position: relative; z-index: 2; width: min(980px, calc(100vw - 40px)); border-radius: 36px; padding: clamp(30px, 4vw, 54px); text-align: center; opacity: 0; }
+.wall-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 26px; }
+.wall-item b { display: block; font-family: var(--f-d); font-weight: 500; font-size: clamp(54px, 6.4vw, 96px); line-height: .95; text-transform: uppercase; }
+.wall-item span { display: block; margin-top: 10px; font-size: 14px; color: var(--ink2); max-width: 24ch; margin-left: auto; margin-right: auto; }
+.wall-item { opacity: 0; will-change: transform, opacity, filter; }
+
 /* ─── TESTIMONIOS ─── */
 .quotes-wrap { overflow: hidden; }
 .quotes { display: flex; gap: 16px; width: max-content; animation: slide 90s linear infinite; }
@@ -407,14 +419,22 @@ input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 
 .chip { height: 38px; padding: 0 15px; border: 1px solid var(--line); font-family: var(--f-d); font-weight: 600; font-size: 14px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink2); transition: all .3s; white-space: nowrap; }
 .chip:hover { border-color: var(--ink); color: var(--ink); }
 .chip.on { background: var(--ink); color: #fff; border-color: var(--ink); }
-.dir { border-top: 1px solid var(--ink); }
-.prov { display: grid; grid-template-columns: 170px 1.3fr 1fr auto; gap: 20px; align-items: center; padding: 20px 0; border-bottom: 1px solid var(--line); transition: background .3s, padding .5s var(--ease); }
-.prov:hover { background: var(--bg2); padding-left: 16px; padding-right: 16px; }
-.prov small { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink3); }
-.prov b { font-family: var(--f-d); font-weight: 500; font-size: 26px; text-transform: uppercase; line-height: 1; }
-.prov span { font-size: 14px; color: var(--ink2); overflow: hidden; text-overflow: ellipsis; }
-.prov a { font-family: var(--f-d); font-weight: 600; font-size: 14px; letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; }
-.prov a:hover { color: var(--yDeep); }
+.dir { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.prov { display: flex; flex-direction: column; gap: 16px; padding: 22px; border: 1px solid var(--line); border-radius: 22px; background: #fff; transition: transform .6s var(--ease), box-shadow .6s var(--ease), border-color .4s; animation: provIn .7s var(--ease) both; }
+@keyframes provIn { from { opacity: 0; transform: translateY(18px); } }
+.prov:hover { transform: translateY(-4px); border-color: transparent; box-shadow: 0 24px 50px -28px rgba(0, 0, 0, .3); }
+.prov-av { width: 54px; height: 54px; border-radius: 50%; background: var(--bg2); display: grid; place-items: center; font-family: var(--f-d); font-weight: 600; font-size: 20px; letter-spacing: .04em; transition: background .4s; }
+.prov:hover .prov-av { background: var(--y); }
+.prov-tx small { display: block; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink3); margin-bottom: 4px; }
+.prov-tx b { display: block; font-family: var(--f-d); font-weight: 500; font-size: 26px; text-transform: uppercase; line-height: 1; }
+.prov-tx span { display: block; margin-top: 6px; font-size: 14px; color: var(--ink2); }
+.prov-acts { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
+.prov-acts a { display: inline-flex; align-items: center; gap: 7px; height: 36px; padding: 0 13px; border-radius: 999px; background: var(--bg2); font-size: 13px; font-weight: 500; max-width: 100%; transition: background .3s, color .3s; }
+.prov-acts a span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.prov-acts a:hover { background: var(--ink); color: #fff; }
+.dir-join { margin-top: 40px; display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; padding: 28px 30px; border-radius: 24px; background: var(--bg2); }
+.dir-join b { display: block; font-family: var(--f-d); font-weight: 600; font-size: 26px; text-transform: uppercase; }
+.dir-join span { font-size: 15px; color: var(--ink2); }
 .dir-more { display: flex; justify-content: center; margin-top: 34px; }
 .dir-empty { text-align: center; color: var(--ink3); padding: 40px; }
 
@@ -499,11 +519,8 @@ input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 
   .stage-dots { margin-top: 10px; }
   .p-list { padding: 1vh 0 10vh; }
   .p-item { padding: 34px 0; }
-  .prov { grid-template-columns: 1fr auto; gap: 4px 16px; }
   .crew .stage { aspect-ratio: 4 / 5; max-height: 46vh; }
-  .prov small { grid-column: 1/-1; }
-  .prov b, .prov span { grid-column: 1; }
-  .prov a { grid-row: 2 / 4; grid-column: 2; }
+  .dir { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 760px) {
   :root { --nav: 62px; }
@@ -547,8 +564,14 @@ input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 
   .ig-cols { grid-template-columns: repeat(3, 1fr); gap: 10px; inset: -25% -20%; }
   .ig-col { gap: 10px; }
   .ig-col:nth-child(n+4) { display: none; }
+  .wall-grid { grid-template-columns: 1fr; gap: 22px; }
+  .wall-card { padding: 30px 24px; }
   .ig-col a { border-radius: 14px; }
-  .prov b { font-size: 22px; }
+  .dir { grid-template-columns: 1fr; gap: 10px; }
+  .prov { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 12px 14px; padding: 18px; }
+  .prov-tx { flex: 1; min-width: 0; }
+  .prov-tx b { font-size: 22px; }
+  .prov-acts { width: 100%; }
 }
 @media (hover: none) { .member img { filter: none; } .film .play-sq { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) {

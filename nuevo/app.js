@@ -105,17 +105,18 @@
       document.body.classList.remove('loading');
       document.body.classList.add('ready');
       setTimeout(() => $('#loader').remove(), 1200);
-      if (!lowData) {
-        hv.src = '../Videos%20Web/7.mp4';
-        hv.addEventListener('canplay', () => { hv.classList.add('on'); }, { once: true });
-        hv.play().catch(() => {});
-      }
+      hv.play().catch(() => {});
     }, 250);
   });
+  // Video del inicio: aparece en cuanto empieza a reproducirse; si el celular bloquea el autoplay, arranca al primer toque
+  const showHero = () => hv.classList.add('on');
+  hv.addEventListener('playing', showHero);
+  if (!hv.paused && hv.readyState > 2) showHero();
+  hv.play().catch(() => {});
+  ['touchstart', 'pointerdown', 'scroll'].forEach(ev => addEventListener(ev, () => { if (hv.paused && !$('#hero')._cov) hv.play().catch(() => {}); }, { once: true, passive: true }));
   const svgMuted = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="m23 9-6 6M17 9l6 6"/></svg>';
   const svgOn = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg>';
   $('#sound').addEventListener('click', () => {
-    if (!hv.src) { hv.src = '../Videos%20Web/7.mp4'; hv.classList.add('on'); }
     hv.muted = !hv.muted; hv.play().catch(() => {});
     $('#sound').innerHTML = hv.muted ? svgMuted : svgOn;
   });
@@ -153,7 +154,7 @@
   /* ═════════ STATEMENT: palabras se encienden ═════════ */
   const st = $('#statement');
   st.innerHTML = st.innerHTML.replace(/(<span class="hl">([^<]+)<\/span>)|([^\s<]+)/g, (m, sp, inner, w) => sp ? `<span class="w hl">${inner}</span>` : `<span class="w">${w}</span>`);
-  const words = $$('.w', st);
+  const words = $$('.w', st), stSec = st.closest('section');
 
   /* ═════════ PELÍCULAS ═════════ */
   const track = $('#track');
@@ -163,9 +164,8 @@
         <video muted loop playsinline preload="metadata" src="../Galeria%20Videos/previews/${enc(f)}#t=1"></video>
         <span class="play-sq"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4v16l13-8z"/></svg></span>
       </div>
-      <div class="film-t"><b>${n}</b><span>${String(i + 1).padStart(2, '0')} · ${t}</span></div>
+      <div class="film-t"><b>${n}</b><span>${t}</span></div>
     </article>`).join('');
-  $('#f-tot').textContent = String(FILMS.length).padStart(2, '0');
   const films = $$('.film', track);
   let activeFilm = -1;
   const setFilm = i => {
@@ -174,7 +174,6 @@
       const v = $('video', f); f.classList.toggle('on', k === i);
       if (k === i) v.play().catch(() => {}); else v.pause();
     });
-    $('#f-now').textContent = String(i + 1).padStart(2, '0');
   };
   films.forEach(f => {
     const open = () => openModal(f.dataset.src);
@@ -265,7 +264,7 @@
   });
   crew.load(TEAM, (m, i) => `
       <li class="p-item" data-i="${i}">
-        <div class="p-row"><h3 class="p-name">${m.n}</h3><div class="p-price">${String(i + 1).padStart(2, '0')}</div></div>
+        <div class="p-row"><h3 class="p-name">${m.n}</h3></div>
         <div class="p-body">
           <div class="p-meta"><span>${m.r}</span></div>
           <p class="c-bio">${m.bio}</p>
@@ -344,6 +343,10 @@
     return `<a href="https://www.instagram.com/mcfilms_ecuador/" target="_blank" rel="noopener" aria-label="Ver en Instagram"><img src="img/${n}-s.webp" alt="" loading="lazy" decoding="async"></a>`;
   }).join('')}</div>`).join('');
   const igColEls = $$('.ig-col', igCols);
+  const wallCols = $('#wall-cols'), wallSec = $('.wall-sec');
+  const WF = ['catedral', 'caminando', 'luces', 'arco', 'velo-pasto', 'montana', 'amigos', 'altar', 'retrato-velo', 'lago', 'calle', 'jardin', 'auto', 'petalos', 'abrazo-velo'];
+  wallCols.innerHTML = [0, 1, 2, 3, 4].map(c => `<div class="ig-col">${[0, 1, 2, 3, 4, 5].map(r => `<span><img src="img/${WF[(c * 4 + r * 3) % WF.length]}-s.webp" alt="" loading="lazy" decoding="async"></span>`).join('')}</div>`).join('');
+  const wallColEls = $$('.ig-col', wallCols), wallItems = $$('.wall-item', wallSec), wallCard = $('#wall-card');
   $('.wave').innerHTML = Array.from({ length: 32 }, (_, i) => `<i style="animation-delay:${(i * 97 % 1400) / 1000}s"></i>`).join('');
 
   /* ═════════ DIRECTORIO ═════════ */
@@ -353,9 +356,20 @@
   const renderDir = () => {
     const qv = $('#dir-q').value.trim().toLowerCase();
     const list = provs.filter(p => (cat === 'Todos' || p.g === cat) && (!qv || (p.name + p.cat + p.ig + p.resp).toLowerCase().includes(qv)));
-    dirEl.innerHTML = list.slice(0, limit).map(p => `
-      <div class="prov"><small>${nombreCat[p.cat] || p.cat}</small><b>${p.name}</b><span>${p.ig}</span>
-      <a href="${p.link}" target="_blank" rel="noopener">${p.link.includes('wa.me') ? 'WhatsApp' : 'Instagram'} →</a></div>`).join('') || '<p class="dir-empty">No encontramos proveedores con esa búsqueda.</p>';
+    const ini = n => n.replace(/[^\p{L}\s]/gu, '').split(/\s+/).filter(Boolean).slice(0, 2).map(w => w[0]).join('').toUpperCase();
+    const icWa = '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.8s.7-2 .9-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.1.1.7-.1 1.3z"/></svg>';
+    const icIg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></svg>';
+    dirEl.innerHTML = list.slice(0, limit).map((p, i) => {
+      const h = (p.ig || '').replace(/^@/, '').trim();
+      return `<article class="prov" style="animation-delay:${(i % 10) * 40}ms">
+        <div class="prov-av">${ini(p.name)}</div>
+        <div class="prov-tx"><small>${nombreCat[p.cat] || p.cat}</small><b>${p.name}</b>${p.resp ? `<span>${p.resp}</span>` : ''}</div>
+        <div class="prov-acts">
+          ${p.link.includes('wa.me') ? `<a href="${p.link}" target="_blank" rel="noopener" aria-label="WhatsApp de ${p.name}">${icWa}<span>WhatsApp</span></a>` : ''}
+          ${h ? `<a href="https://www.instagram.com/${encodeURIComponent(h)}/" target="_blank" rel="noopener" aria-label="Instagram de ${p.name}">${icIg}<span>@${h}</span></a>` : ''}
+        </div>
+      </article>`;
+    }).join('') || '<p class="dir-empty">No encontramos proveedores con esa búsqueda.</p>';
     moreBtn.parentElement.style.display = list.length > limit ? '' : 'none';
   };
   fetch('proveedores.json?v=1791603233').then(r => r.json()).then(d => {
@@ -433,17 +447,29 @@
         else pn.style.clipPath = rr ? `inset(0 round ${rr}px ${rr}px 0 0)` : '';
       });
     }
+    // Cifras: muro en movimiento y textos que aparecen sobre el cristal
+    const wr = wallSec.getBoundingClientRect();
+    if (wr.top < vh && wr.bottom > 0) {
+      const p = clamp(-wr.top / (wallSec.offsetHeight - vh)); // 0 → 1 mientras la sección está anclada
+      wallColEls.forEach((c, i) => { c.style.transform = `translate3d(0,${(i % 2 ? 1 : -1) * (p - .5) * 260}px,0)`; });
+      const ce = easeOut(clamp(p / .25));
+      wallCard.style.transform = `scale(${.86 + .14 * ce})`; wallCard.style.opacity = ce;
+      wallItems.forEach((it, i) => {
+        const q = easeOut(clamp((p - .12 - i * .15) / .2));
+        it.style.opacity = q; it.style.transform = `translate3d(0,${(1 - q) * 34}px,0)`; it.style.filter = q < 1 ? `blur(${((1 - q) * 10).toFixed(1)}px)` : '';
+      });
+    }
     // Instagram: columnas en paralaje
     const ir = igCols.getBoundingClientRect();
     if (!reduce && ir.top < vh && ir.bottom > 0) {
       const k = (ir.top + ir.height / 2 - vh / 2) / vh;
       igColEls.forEach((c, i) => { c.style.transform = `translate3d(0,${(i % 2 ? 1 : -1) * k * 160 - 80}px,0)`; });
     }
-    if (hv.src) { if ($('#hero')._cov) hv.pause(); else if (hv.paused && !document.hidden) hv.play().catch(() => {}); }
+    if (hv.currentSrc) { if ($('#hero')._cov) hv.pause(); else if (hv.paused && !document.hidden) hv.play().catch(() => {}); }
     if (band._cov && !bandV.paused) bandV.pause();
     // statement
-    const r = st.getBoundingClientRect();
-    const lit = Math.round(clamp((vh * .95 - r.top) / (vh * .75)) * words.length);
+    const r = stSec.getBoundingClientRect(); // se completa cuando la tarjeta termina de subir
+    const lit = Math.round(clamp((vh * .85 - r.top) / (vh * .7)) * words.length);
     words.forEach((w, i) => w.classList.toggle('on', i < lit));
     // parallax imágenes
     if (!reduce) pars.forEach(im => { const b = im.parentElement.getBoundingClientRect(); if (b.bottom > 0 && b.top < vh) im.style.transform = `translate3d(0,${(b.top + b.height / 2 - vh / 2) * -.12}px,0)`; });

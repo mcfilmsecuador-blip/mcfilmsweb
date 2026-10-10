@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="img/lago-s.webp" imagesrcset="img/lago-s.webp 1100w, img/lago.webp 2400w" imagesizes="100vw" fetchpriority="high">
-<link rel="stylesheet" href="styles.css?v=1791609606">
+<link rel="stylesheet" href="styles.css?v=1791611164">
 
 <script type="application/ld+json">
 {
@@ -127,7 +127,7 @@
 <section class="panel hero" id="hero">
   <div class="hero-media" id="hero-media">
     <img src="img/lago-s.webp" srcset="img/lago-s.webp 1100w, img/lago.webp 2400w" sizes="100vw" alt="Novios abrazados junto a una laguna en el páramo de Ecuador, fotografía de boda MCFILMS" fetchpriority="high">
-    <video id="hero-video" muted loop playsinline preload="none" aria-hidden="true"></video>
+    <video id="hero-video" src="../Videos%20Web/7.mp4" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
   </div>
   <div class="hero-copy" id="hero-copy">
     <span class="eyebrow fx">Fotografía y cine de bodas · Ecuador</span>
@@ -149,7 +149,7 @@
 <!-- STATEMENT -->
 <section class="panel statement glassy">
   <div class="wrap">
-    <p id="statement">No documentamos bodas. Las dirigimos como cine: cada mirada, cada abrazo, cada <span class="hl">lágrima</span> contada con la belleza que tu historia merece.</p>
+    <p id="statement">No documentamos bodas. Las dirigimos como cine: cada mirada, cada abrazo, cada lágrima contada con la belleza que tu <span class="hl">historia</span> merece.</p>
   </div>
 </section>
 
@@ -199,7 +199,6 @@
         <span class="eyebrow rv">Películas</span>
         <h2 class="d d-l split" style="margin-top:16px"><span class="ln"><span>Historias reales</span></span></h2>
       </div>
-      <div class="films-count"><b id="f-now">01</b> / <span id="f-tot">06</span></div>
     </div>
     <div class="track" id="track"></div>
     <div class="films-bar"><i id="f-bar"></i></div>
@@ -207,12 +206,19 @@
 </section>
 
 <!-- CIFRAS -->
-<section class="panel stats-sec" aria-label="Cifras">
-  <div class="wrap"><div class="stats rv">
-    <div class="stat"><div class="stat-n" data-count="720">0</div><div class="stat-t">Bodas filmadas</div></div>
-    <div class="stat"><div class="stat-n" data-count="11">0</div><div class="stat-t">Años contando historias</div></div>
-    <div class="stat"><div class="stat-n" data-count="500" data-suf="K" data-pre="1">0</div><div class="stat-t">Fotos entregadas</div></div>
-  </div></div>
+<section class="panel wall-sec" aria-label="Trayectoria">
+  <div class="wall-pin">
+    <div class="ig-cols wall" id="wall-cols" aria-hidden="true"></div>
+    <div class="ig-veil"></div>
+    <div class="wall-card glass-sheet" id="wall-card">
+      <span class="eyebrow wall-item" style="--i:0">Desde 2015 · Cuenca, Ecuador</span>
+      <div class="wall-grid">
+        <div class="wall-item" style="--i:1"><b>720+</b><span>bodas filmadas en todo el Ecuador</span></div>
+        <div class="wall-item" style="--i:2"><b>11 años</b><span>contando historias con lenguaje de cine</span></div>
+        <div class="wall-item" style="--i:3"><b>+500K</b><span>fotografías entregadas a nuestras parejas</span></div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- PLANES -->
@@ -385,6 +391,10 @@
     </div>
     <div class="dir" id="dir"></div>
     <div class="dir-more"><button class="btn btn-l" id="dir-more">Ver más proveedores</button></div>
+    <div class="dir-join rv">
+      <div><b>¿Eres proveedor de bodas?</b><span>Súmate a nuestro directorio y llega a parejas que están organizando su gran día.</span></div>
+      <a class="btn btn-y" href="mailto:info@mcfilmsecuador.com?subject=Quiero%20estar%20en%20el%20directorio%20de%20proveedores">Quiero aparecer</a>
+    </div>
   </div>
 </section>
 
@@ -485,6 +495,6 @@
 </div>
 
 <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
-<script src="app.js?v=1791609606" defer></script>
+<script src="app.js?v=1791611164" defer></script>
 </body>
 </html>
