@@ -20,3 +20,4 @@ backup_originals/
 *.tmp
 *.log
 temp_*
+.claude/
