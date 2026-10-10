@@ -43,6 +43,17 @@ main > .panel { position: sticky; top: 0; transform-origin: 50% 0; }
 main > .panel::after { content: ""; position: absolute; inset: 0; background: #060607; opacity: var(--dim, 0); pointer-events: none; z-index: 60; }
 .stats-sec { padding: clamp(60px, 8vw, 100px) 0; }
 
+/* Cristal líquido (estilo iOS): se ve la sección anterior difuminada detrás */
+.glass-sheet {
+  background: linear-gradient(160deg, rgba(255,255,255,.66) 0%, rgba(255,255,255,.3) 48%, rgba(255,255,255,.5) 100%);
+  -webkit-backdrop-filter: blur(32px) saturate(180%); backdrop-filter: blur(32px) saturate(180%);
+  border: 1px solid rgba(255,255,255,.7);
+  box-shadow: inset 0 1px 1px rgba(255,255,255,.95), inset 0 -18px 40px rgba(255,255,255,.2), 0 30px 80px -30px rgba(0,0,0,.35);
+}
+main > .panel.glassy { background: transparent; border-radius: var(--rr, 0) var(--rr, 0) 0 0; }
+.band-head { border-radius: var(--rr, 0) var(--rr, 0) 0 0; }
+.statement.glassy { background: linear-gradient(180deg, rgba(255,255,255,.62), rgba(255,255,255,.82)); -webkit-backdrop-filter: blur(40px) saturate(170%); backdrop-filter: blur(40px) saturate(170%); box-shadow: inset 0 1px 0 rgba(255,255,255,.9); }
+
 /* Tipografía */
 .d { font-family: var(--f-d); font-weight: 500; text-transform: uppercase; letter-spacing: .015em; line-height: .95; }
 .d-xl { font-size: clamp(52px, 7.4vw, 124px); }
@@ -159,7 +170,7 @@ main > .panel::after { content: ""; position: absolute; inset: 0; background: #0
 .statement { padding: clamp(110px, 16vw, 210px) 0; text-align: center; min-height: 100vh; min-height: 100svh; display: flex; align-items: center; }
 .statement .wrap { width: 100%; }
 .statement p { font-size: clamp(24px, 3vw, 42px); line-height: 1.3; letter-spacing: -.02em; max-width: 30ch; margin: 0 auto; }
-.statement .w { color: #d5d5d1; transition: color .4s; }
+.statement .w { color: rgba(11, 11, 12, .2); transition: color .4s; }
 .statement .w.on { color: var(--ink); }
 .statement .w.hl.on { box-shadow: inset 0 -.3em 0 var(--y); }
 
@@ -179,9 +190,10 @@ main > .panel::after { content: ""; position: absolute; inset: 0; background: #0
 .ed-title { margin-top: clamp(90px, 12vw, 160px); display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; margin-bottom: clamp(40px, 5vw, 60px); }
 
 /* ─── BANDA OSCURA + REEL ─── */
-.band { background: var(--ink); color: #fff; text-align: center; padding: clamp(90px, 12vw, 150px) 0 0; overflow: hidden; }
-.band .sub { color: rgba(255, 255, 255, .65); margin-top: 18px; font-size: 16px; }
-.band-reel { position: relative; margin-top: clamp(50px, 7vw, 90px); aspect-ratio: 16 / 8; max-height: 88vh; width: 100%; overflow: hidden; cursor: pointer; display: block; }
+.band { color: var(--ink); text-align: center; }
+.band-head { padding: clamp(90px, 12vw, 150px) 0 clamp(60px, 8vw, 100px); border-width: 1px 0 0; }
+.band .sub { color: var(--ink2); margin-top: 18px; font-size: 16px; }
+.band-reel { position: relative; margin-top: 0; aspect-ratio: 16 / 8; max-height: 88vh; width: 100%; overflow: hidden; cursor: pointer; display: block; }
 .band-reel video, .band-reel img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .band-reel::after { content: ""; position: absolute; inset: 0; background: rgba(0, 0, 0, .25); transition: background .5s; }
 .band-reel:hover::after { background: rgba(0, 0, 0, .1); }
@@ -322,6 +334,34 @@ input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 
 .member b { display: block; margin-top: 14px; font-family: var(--f-d); font-weight: 600; font-size: 21px; text-transform: uppercase; letter-spacing: .03em; line-height: 1.05; }
 .member span { font-size: 13px; color: var(--ink2); }
 
+/* Equipo con el mismo efecto de los planes */
+.crew-head { margin-top: clamp(90px, 12vw, 150px); max-width: 720px; }
+.crew .p-name { font-size: clamp(36px, 4.2vw, 66px); }
+.crew .p-price { font-size: clamp(20px, 1.8vw, 26px); }
+.crew .stage img { object-position: 50% 22%; }
+.c-bio { margin: 16px 0 18px; font-size: 16.5px; line-height: 1.65; color: var(--ink2); max-width: 46ch; }
+.c-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.c-tags span { font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; padding: 7px 11px; border: 1px solid var(--line); }
+.crew .p-item.on .c-tags span:first-child { background: var(--y); border-color: var(--y); }
+
+/* Instagram: muro en movimiento + tarjeta de cristal */
+.ig-sec { position: relative; height: 112vh; height: 112svh; min-height: 680px; overflow: hidden; display: grid; place-items: center; }
+.ig-cols { position: absolute; inset: -25% -8%; display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; transform: rotate(-7deg); }
+.ig-col { display: flex; flex-direction: column; gap: 14px; will-change: transform; }
+.ig-col a { aspect-ratio: 4 / 5; border-radius: 20px; overflow: hidden; background: var(--bg2); display: block; }
+.ig-col img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+.ig-col a:hover img { transform: scale(1.06); }
+.ig-veil { position: absolute; inset: 0; background: radial-gradient(60% 55% at 50% 50%, rgba(255,255,255,.55), rgba(255,255,255,0) 70%); pointer-events: none; }
+.ig-card { position: relative; z-index: 2; width: min(440px, calc(100vw - 40px)); border-radius: 34px; padding: 38px 32px 32px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.ig-card .ig-av { width: 82px; height: 82px; }
+.ig-handle { font-family: var(--f-d); font-weight: 600; font-size: 30px; letter-spacing: .02em; }
+.ig-stats { display: flex; gap: 26px; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink2); }
+.ig-stats b { display: block; font-family: var(--f-d); font-weight: 500; font-size: 28px; letter-spacing: 0; color: var(--ink); line-height: 1.1; }
+.ig-card p { font-size: 15px; color: var(--ink2); max-width: 34ch; }
+.ig-btns { display: flex; gap: 8px; margin-top: 6px; }
+.ig-btns .btn { height: 46px; padding: 0 22px; font-size: 15px; }
+.pod-sec .pod { min-height: 0; }
+
 /* ─── TESTIMONIOS ─── */
 .quotes-wrap { overflow: hidden; }
 .quotes { display: flex; gap: 16px; width: max-content; animation: slide 90s linear infinite; }
@@ -460,6 +500,7 @@ input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 
   .p-list { padding: 1vh 0 10vh; }
   .p-item { padding: 34px 0; }
   .prov { grid-template-columns: 1fr auto; gap: 4px 16px; }
+  .crew .stage { aspect-ratio: 4 / 5; max-height: 46vh; }
   .prov small { grid-column: 1/-1; }
   .prov b, .prov span { grid-column: 1; }
   .prov a { grid-row: 2 / 4; grid-column: 2; }
@@ -503,6 +544,10 @@ input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 
   .team { grid-template-columns: 1fr 1fr; }
   .form { grid-template-columns: 1fr; }
   .ig-user span { display: none; }
+  .ig-cols { grid-template-columns: repeat(3, 1fr); gap: 10px; inset: -25% -20%; }
+  .ig-col { gap: 10px; }
+  .ig-col:nth-child(n+4) { display: none; }
+  .ig-col a { border-radius: 14px; }
   .prov b { font-size: 22px; }
 }
 @media (hover: none) { .member img { filter: none; } .film .play-sq { opacity: 1; } }

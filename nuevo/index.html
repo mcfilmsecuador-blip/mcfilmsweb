@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="img/lago-s.webp" imagesrcset="img/lago-s.webp 1100w, img/lago.webp 2400w" imagesizes="100vw" fetchpriority="high">
-<link rel="stylesheet" href="styles.css?v=1791605349">
+<link rel="stylesheet" href="styles.css?v=1791609606">
 
 <script type="application/ld+json">
 {
@@ -147,7 +147,7 @@
 </section>
 
 <!-- STATEMENT -->
-<section class="panel statement">
+<section class="panel statement glassy">
   <div class="wrap">
     <p id="statement">No documentamos bodas. Las dirigimos como cine: cada mirada, cada abrazo, cada <span class="hl">lágrima</span> contada con la belleza que tu historia merece.</p>
   </div>
@@ -178,10 +178,12 @@
 </section>
 
 <!-- BANDA + REEL -->
-<section class="panel band" aria-label="Reel">
-  <div class="wrap">
-    <h2 class="d d-l split"><span class="ln"><span>Cada boda,</span></span><span class="ln"><span>una película</span></span></h2>
-    <p class="sub rv">Mira nuestro reel con sonido.</p>
+<section class="panel band glassy" aria-label="Reel">
+  <div class="band-head glass-sheet">
+    <div class="wrap">
+      <h2 class="d d-l split"><span class="ln"><span>Cada boda,</span></span><span class="ln"><span>una película</span></span></h2>
+      <p class="sub rv">Mira nuestro reel con sonido.</p>
+    </div>
   </div>
   <a class="band-reel" id="band-reel" href="#" data-src="../Videos%20Web/1.mp4" aria-label="Reproducir reel MCFILMS">
     <video muted loop playsinline preload="none" poster="img/petalos-s.webp" data-src="../Videos%20Web/6.mp4"></video>
@@ -309,7 +311,18 @@
         <p class="lead rv d2">Con base en Cuenca, viajamos a Quito, Guayaquil y a donde tu historia lo necesite, con drones cinema, cámaras 4K, sonido profesional, Magic Mirror y cabina 360.</p>
       </div>
     </div>
-    <div class="team" id="team"></div>
+    <div class="crew-head">
+      <span class="eyebrow rv">El equipo</span>
+      <h3 class="d d-l split" style="margin-top:18px"><span class="ln"><span>Una familia,</span></span><span class="ln"><span>una misma mirada</span></span></h3>
+      <p class="lead rv d1">Directores, fotógrafos, camarógrafos y coordinadores que viven cada boda como un rodaje. Somos familia, y así te vamos a cuidar ese día.</p>
+    </div>
+    <div class="plans crew">
+      <ol class="p-list" id="c-list"></ol>
+      <div class="p-stage">
+        <div class="stage" id="c-stage"><div class="stage-chip"><b id="cs-name"></b><span id="cs-meta"></span></div></div>
+        <div class="stage-dots" id="c-dots"></div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -325,19 +338,25 @@
 </section>
 
 <!-- INSTAGRAM + PODCAST -->
-<section class="panel sec" aria-label="Redes y podcast">
-  <div class="wrap social">
-    <div class="ig rv">
-      <div class="ig-head">
-        <div class="ig-user">
-          <div class="ig-av"><img src="../Mcfilms%20Isotipos/M%20Fondo%20Blanco.png" alt="" width="54" height="54"></div>
-          <div><b>@mcfilms_ecuador</b><span>Lo último de nuestras bodas</span></div>
-        </div>
-        <a class="btn btn-k" href="https://www.instagram.com/mcfilms_ecuador/" target="_blank" rel="noopener">Seguir</a>
-      </div>
-      <div class="ig-grid" id="ig-grid"></div>
+<section class="panel ig-sec" aria-label="Instagram">
+  <div class="ig-cols" id="ig-cols" aria-hidden="true"></div>
+  <div class="ig-veil"></div>
+  <div class="ig-card glass-sheet rv">
+    <div class="ig-av"><img src="../Mcfilms%20Isotipos/M%20Fondo%20Blanco.png" alt="" width="76" height="76"></div>
+    <b class="ig-handle">@mcfilms_ecuador</b>
+    <div class="ig-stats"><span><b>720+</b>bodas</span><span><b>11</b>años</span><span><b>EC</b>Cuenca</span></div>
+    <p>Bodas reales, detrás de cámaras y los reels de cada historia. Lo nuevo, primero en Instagram.</p>
+    <div class="ig-btns">
+      <a class="btn btn-k" href="https://www.instagram.com/mcfilms_ecuador/" target="_blank" rel="noopener">Seguir</a>
+      <a class="btn btn-l" href="https://www.instagram.com/mcfilms_ecuador/reels/" target="_blank" rel="noopener">Ver reels</a>
     </div>
-    <div class="pod rv d1">
+  </div>
+</section>
+
+<!-- PODCAST -->
+<section class="panel sec pod-sec" aria-label="Podcast">
+  <div class="wrap">
+    <div class="pod rv">
       <span class="eyebrow">Podcast · Próximamente</span>
       <h3 class="d d-l">Detrás de las bodas</h3>
       <p>Historias reales, proveedores, nervios y risas: todo lo que no se ve el gran día.</p>
@@ -466,6 +485,6 @@
 </div>
 
 <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
-<script src="app.js?v=1791605349" defer></script>
+<script src="app.js?v=1791609606" defer></script>
 </body>
 </html>

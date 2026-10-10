@@ -4,6 +4,8 @@
   const $ = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => [...c.querySelectorAll(s)];
   const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const easeOut = t => 1 - Math.pow(1 - t, 3);
+  const easeIO = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
   const WA = '593998400211';
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const enc = p => p.split('/').map(encodeURIComponent).join('/');
@@ -65,11 +67,11 @@
   ];
 
   const TEAM = [
-    ['6-Jose-Andres-Mercado', 'José Andrés Mercado', 'Gerente General · Co-fundador'],
-    ['2-Javier_Mercado-', 'Javier Mercado', 'Director Creativo · Co-fundador'],
-    ['3-David_Balseca', 'David Balseca', 'Director de Fotografía'],
-    ['4-Bryan_Espinoza-', 'Bryan Espinoza', 'Director de Video'],
-    ['5-Andrea_Mercado', 'Andrea Mercado', 'Directora de Operaciones']
+    { n: 'José Andrés Mercado', r: 'Gerente General · Co-fundador', img: 'team-jose2', bio: 'Visionario y arquitecto del sueño que dio vida a MCFILMS en 2015. Más de diez años liderando producciones audiovisuales con mirada de cine, y la convicción de que cada boda merece tratarse como una obra.', tags: ['Dirección', 'Estrategia', 'Desde 2015'] },
+    { n: 'Javier Mercado', r: 'Director Creativo · Co-fundador', img: 'team-javier', bio: 'El alma creativa de MCFILMS. Define el estilo narrativo que convierte cada boda en una pieza cinematográfica: el ritmo, la música, el color y esa emoción que te hace volver a verla una y otra vez.', tags: ['Narrativa', 'Edición', 'Color'] },
+    { n: 'David Balseca', r: 'Director de Fotografía', img: 'team-david', bio: 'Guardián de nuestro lenguaje visual. Ojo clínico para la luz, la composición y el color; lidera la fotografía y la postproducción que definen la estética premium de cada álbum.', tags: ['Fotografía', 'Luz', 'Retoque'] },
+    { n: 'Bryan Espinoza', r: 'Director de Video', img: 'team-bryan', bio: 'Mirada fresca, técnica y cinematográfica. Cuida la composición, el movimiento y la luz para que cada película se sienta auténtica, dinámica y memorable.', tags: ['Cámara', 'Drone', 'Movimiento'] },
+    { n: 'Andrea Mercado', r: 'Directora de Operaciones', img: 'team-andrea', bio: 'El pilar que hace que todo funcione. Coordina equipos, tiempos y entregas para que tu experiencia sea impecable desde la primera reunión hasta que recibes tu película.', tags: ['Coordinación', 'Entregas', 'Atención'] }
   ];
 
   // ⚠️ Reemplazar por reseñas reales de clientes (Google / Instagram)
@@ -200,13 +202,49 @@
   $('#modal-x').addEventListener('click', closeModal);
   modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
 
-  /* ═════════ PLANES: lista + escenario ═════════ */
-  const pList = $('#p-list'), stage = $('#stage'), dots = $('#stage-dots');
-  let group = 'bodas', activePlan = -1;
-  const renderPlans = g => {
-    group = g; activePlan = -1;
-    const list = PLANES[g];
-    pList.innerHTML = list.map((p, i) => `
+  /* ═════════ ESCAPARATE: lista que se enciende + foto fija (planes y equipo) ═════════ */
+  const showcases = [];
+  const makeShowcase = (list, stage, dots, chip) => {
+    const sc = { list, stage, dots, items: [], active: -1, lock: 0 };
+    sc.set = i => {
+      if (i === sc.active) return; sc.active = i;
+      $$(':scope > li', list).forEach((el, k) => el.classList.toggle('on', k === i));
+      $$('img', stage).forEach((el, k) => el.classList.toggle('on', k === i));
+      $$('i', dots).forEach((el, k) => el.classList.toggle('on', k === i));
+      chip(sc.items[i]);
+    };
+    sc.load = (items, html, pics) => {
+      sc.items = items; sc.active = -1;
+      list.innerHTML = items.map(html).join('');
+      $$('img', stage).forEach(i => i.remove());
+      stage.insertAdjacentHTML('afterbegin', pics.join(''));
+      dots.innerHTML = items.map(() => '<i></i>').join('');
+      sc.set(0);
+    };
+    list.addEventListener('click', e => {
+      if (e.target.closest('a')) return;
+      const li = e.target.closest('li[data-i]'); if (!li) return;
+      sc.lock = Date.now(); sc.set(+li.dataset.i);
+    });
+    sc.update = vh => { // activo según posición de scroll
+      if (Date.now() - sc.lock < 900) return;
+      const lr = list.getBoundingClientRect(); if (lr.top > vh || lr.bottom < 0) return;
+      const sb = stage.parentElement.getBoundingClientRect();
+      const line = innerWidth <= 1080 ? sb.bottom + (vh - sb.bottom) * .3 : vh * .45;
+      let idx = 0;
+      $$(':scope > li', list).forEach((el, k) => { if (el.getBoundingClientRect().top < line) idx = k; });
+      sc.set(idx);
+    };
+    showcases.push(sc);
+    return sc;
+  };
+
+  // Planes
+  const pList = $('#p-list');
+  const plans = makeShowcase(pList, $('#stage'), $('#stage-dots'), p => {
+    $('#st-name').textContent = p.n; $('#st-meta').innerHTML = `${p.h}<br>$${money(p.p)} ${p.suf || '+ IVA'}`;
+  });
+  const renderPlans = g => plans.load(PLANES[g], (p, i) => `
       <li class="p-item" data-i="${i}">
         <div class="p-row"><h3 class="p-name">${p.n}</h3><div class="p-price">$${money(p.p)}<small>${p.suf || '+ IVA'}</small></div></div>
         <div class="p-body">
@@ -215,31 +253,25 @@
           ${p.ind ? `<p class="p-ind">${p.ind}</p>` : ''}
           <a class="btn btn-k" target="_blank" rel="noopener" href="https://wa.me/${WA}?text=${encodeURIComponent(`Hola MCFILMS, me interesa el plan ${p.n} (${p.h}). ¿Tienen disponible mi fecha?`)}">Reservar ${p.n}</a>
         </div>
-      </li>`).join('');
-    $$('img', stage).forEach(i => i.remove());
-    stage.insertAdjacentHTML('afterbegin', list.map(p => img(p.img, `Plan ${p.n} MCFILMS`)).join(''));
-    dots.innerHTML = list.map(() => '<i></i>').join('');
-    setPlan(0);
-  };
-  const setPlan = i => {
-    if (i === activePlan) return; activePlan = i;
-    const p = PLANES[group][i];
-    $$('.p-item', pList).forEach((el, k) => el.classList.toggle('on', k === i));
-    $$('img', stage).forEach((el, k) => el.classList.toggle('on', k === i));
-    $$('i', dots).forEach((el, k) => el.classList.toggle('on', k === i));
-    $('#st-name').textContent = p.n;
-    $('#st-meta').innerHTML = `${p.h}<br>$${money(p.p)} ${p.suf || '+ IVA'}`;
-  };
-  pList.addEventListener('click', e => {
-    if (e.target.closest('a')) return;
-    const li = e.target.closest('.p-item'); if (!li) return;
-    lockPlan = Date.now(); setPlan(+li.dataset.i);
-  });
-  let lockPlan = 0;
+      </li>`, PLANES[g].map(p => img(p.img, `Plan ${p.n} MCFILMS`)));
   $$('.cat').forEach(c => c.addEventListener('click', () => {
     $$('.cat').forEach(x => x.classList.toggle('on', x === c));
-    renderPlans(c.dataset.g); lockPlan = Date.now();
+    renderPlans(c.dataset.g); plans.lock = Date.now();
   }));
+
+  // Equipo
+  const crew = makeShowcase($('#c-list'), $('#c-stage'), $('#c-dots'), m => {
+    $('#cs-name').textContent = m.n.split(' ')[0]; $('#cs-meta').textContent = m.r;
+  });
+  crew.load(TEAM, (m, i) => `
+      <li class="p-item" data-i="${i}">
+        <div class="p-row"><h3 class="p-name">${m.n}</h3><div class="p-price">${String(i + 1).padStart(2, '0')}</div></div>
+        <div class="p-body">
+          <div class="p-meta"><span>${m.r}</span></div>
+          <p class="c-bio">${m.bio}</p>
+          <div class="c-tags">${m.tags.map(t => `<span>${t}</span>`).join('')}</div>
+        </div>
+      </li>`, TEAM.map(m => `<img src="img/${m.img}.webp" alt="${m.n}, ${m.r} en MCFILMS" loading="lazy" decoding="async">`));
 
   /* ═════════ ARMA TU PLAN ═════════ */
   const stt = { evento: 'boda', servicio: 'fv', horas: 7, extras: new Set(['drone']) };
@@ -302,11 +334,16 @@
   mini.addEventListener('click', () => goTo('.summary'));
 
   /* ═════════ EQUIPO / TESTIMONIOS / IG ═════════ */
-  $('#team').innerHTML = TEAM.map(([f, n, r], i) => `<div class="member rv d${i % 4}"><figure><img src="../Mcfilms%20Teams/${enc(f)}.webp" alt="${n}, ${r} en MCFILMS" loading="lazy"></figure><b>${n}</b><span>${r}</span></div>`).join('');
   const q = QUOTES.map(([t, n, c]) => `<blockquote class="quote"><div class="stars">★★★★★</div><p>“${t}”</p><footer><b>${n}</b>${c}</footer></blockquote>`).join('');
   $('#quotes').innerHTML = q + q;
-  $('#ig-grid').innerHTML = ['bosque', 'auto', 'calle', 'jardin', 'bota', 'hindu'].map(n =>
-    `<a href="https://www.instagram.com/mcfilms_ecuador/" target="_blank" rel="noopener" aria-label="Ver en Instagram"><img src="img/${n}-s.webp" alt="" loading="lazy"></a>`).join('');
+  // Instagram: columnas que se mueven en sentidos opuestos al hacer scroll
+  const IGF = ['bosque', 'auto', 'calle', 'jardin', 'bota', 'hindu', 'risas', 'anillos', 'retrato', 'novia-ventana', 'fiesta', 'escalera', 'paramo', 'abrazo-velo', 'petalos'];
+  const igCols = $('#ig-cols');
+  igCols.innerHTML = [0, 1, 2, 3, 4].map(c => `<div class="ig-col">${[0, 1, 2, 3, 4, 5].map(r => {
+    const n = IGF[(c * 3 + r * 2) % IGF.length];
+    return `<a href="https://www.instagram.com/mcfilms_ecuador/" target="_blank" rel="noopener" aria-label="Ver en Instagram"><img src="img/${n}-s.webp" alt="" loading="lazy" decoding="async"></a>`;
+  }).join('')}</div>`).join('');
+  const igColEls = $$('.ig-col', igCols);
   $('.wave').innerHTML = Array.from({ length: 32 }, (_, i) => `<i style="animation-delay:${(i * 97 % 1400) / 1000}s"></i>`).join('');
 
   /* ═════════ DIRECTORIO ═════════ */
@@ -356,8 +393,7 @@
     // nav
     nav.classList.toggle('solid', y > vh - 90);
     document.body.classList.toggle('in-hero', y < vh * .6);
-    const pr = pList.getBoundingClientRect();
-    const inPlans = innerWidth <= 1080 && pr.top < vh && pr.bottom > 0; // en móvil la foto del plan se pega bajo el menú
+    const inPlans = innerWidth <= 1080 && showcases.some(sc => { const r = sc.list.getBoundingClientRect(); return r.top < vh && r.bottom > 0; }); // en móvil la foto se pega bajo el menú
     nav.classList.toggle('hide', y > lastY + 2 && y > vh * 1.3 && !inPlans && !document.body.classList.contains('menu-open'));
     if (inPlans) nav.classList.remove('hide');
     if (y < lastY - 2) nav.classList.remove('hide');
@@ -370,24 +406,39 @@
       heroCopy.style.opacity = clamp(1 - k * 1.8);
     }
     updMini();
-    // tarjetas apiladas
-    if (!reduce) panels.forEach((pn, i) => {
-      const next = panels[i + 1];
-      const nt = next ? next.getBoundingClientRect().top : vh;
-      const k = clamp((vh - nt) / vh);
-      const cov = nt <= 0; // tapada por completo: se oculta para no gastar batería
-      if (cov !== !!pn._cov) { pn._cov = cov; pn.style.visibility = cov ? 'hidden' : ''; }
-      if (k > 0.001) {
-        pn.style.setProperty('--dim', (k * .72).toFixed(3));
-        pn.style.transform = `scale(${(1 - k * .06).toFixed(4)})`;
-        pn.style.transformOrigin = `50% ${-pn._top + vh / 2}px`;
-      } else if (pn.style.transform) { pn.style.removeProperty('--dim'); pn.style.transform = ''; }
-      if (i > 0) {
-        const t = pn.getBoundingClientRect().top;
-        const rr = t > 0 && t < vh ? Math.round(28 * clamp(t / (vh * .5))) : 0;
-        pn.style.clipPath = rr ? `inset(0 round ${rr}px ${rr}px 0 0)` : '';
-      }
-    });
+    // tarjetas apiladas: la de abajo sube un poco más pequeña y redondeada; la de arriba se aleja y oscurece
+    if (!reduce) {
+      const tops = panels.map(pn => pn.getBoundingClientRect().top);
+      panels.forEach((pn, i) => {
+        const next = panels[i + 1];
+        const nt = next ? tops[i + 1] : vh;
+        const glassNext = next && next.classList.contains('glassy');
+        const k = easeIO(clamp((vh - nt) / vh));
+        const cov = nt <= 0 && !glassNext; // tapada por completo: se oculta para ahorrar batería
+        if (cov !== !!pn._cov) { pn._cov = cov; pn.style.visibility = cov ? 'hidden' : ''; }
+        const t = tops[i];
+        const e = i > 0 && t > 0 ? easeOut(clamp(1 - t / vh)) : 1; // entrada
+        if (k > 0.001) {
+          pn.style.setProperty('--dim', (k * (glassNext ? .22 : .7)).toFixed(3));
+          pn.style.transform = `scale(${(1 - k * .07).toFixed(4)})`;
+          pn.style.transformOrigin = `50% ${-pn._top + vh / 2}px`;
+        } else if (e < 1) {
+          pn.style.removeProperty('--dim');
+          pn.style.transform = `scale(${(.9 + .1 * e).toFixed(4)})`;
+          pn.style.transformOrigin = '50% 0';
+        } else if (pn.style.transform) { pn.style.removeProperty('--dim'); pn.style.transform = ''; }
+        const rr = e < 1 ? Math.round(36 * (1 - e)) : 0;
+        // en paneles de cristal el recorte rompería el desenfoque: se redondea con border-radius
+        if (pn.classList.contains('glassy')) pn.style.setProperty('--rr', rr + 'px');
+        else pn.style.clipPath = rr ? `inset(0 round ${rr}px ${rr}px 0 0)` : '';
+      });
+    }
+    // Instagram: columnas en paralaje
+    const ir = igCols.getBoundingClientRect();
+    if (!reduce && ir.top < vh && ir.bottom > 0) {
+      const k = (ir.top + ir.height / 2 - vh / 2) / vh;
+      igColEls.forEach((c, i) => { c.style.transform = `translate3d(0,${(i % 2 ? 1 : -1) * k * 160 - 80}px,0)`; });
+    }
     if (hv.src) { if ($('#hero')._cov) hv.pause(); else if (hv.paused && !document.hidden) hv.play().catch(() => {}); }
     if (band._cov && !bandV.paused) bandV.pause();
     // statement
@@ -410,18 +461,7 @@
       if (fr.top < vh * .7 && fr.bottom > vh * .3 && !filmsSec._cov) { if (activeFilm < 0) setFilm(0); }
       else if (activeFilm > -1) { films.forEach(f => $('video', f).pause()); activeFilm = -1; }
     }
-    // planes: activo según posición
-    if (Date.now() - lockPlan > 900) {
-      const items = $$('.p-item', pList);
-      const sb = $('.p-stage').getBoundingClientRect();
-      const line = innerWidth <= 1080 ? sb.bottom + (vh - sb.bottom) * .3 : vh * .45;
-      const lr = pList.getBoundingClientRect();
-      if (lr.top < vh && lr.bottom > 0) {
-        let idx = 0;
-        items.forEach((el, k) => { if (el.getBoundingClientRect().top < line) idx = k; });
-        setPlan(idx);
-      }
-    }
+    showcases.forEach(sc => sc.update(vh));
   };
   addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
   const panels = $$('main > .panel');
