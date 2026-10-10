@@ -321,7 +321,7 @@
       <a href="${p.link}" target="_blank" rel="noopener">${p.link.includes('wa.me') ? 'WhatsApp' : 'Instagram'} →</a></div>`).join('') || '<p class="dir-empty">No encontramos proveedores con esa búsqueda.</p>';
     moreBtn.parentElement.style.display = list.length > limit ? '' : 'none';
   };
-  fetch('proveedores.json').then(r => r.json()).then(d => {
+  fetch('proveedores.json?v=1791603233').then(r => r.json()).then(d => {
     provs = d.map(p => ({ ...p, g: grupoDe(p.cat) }));
     $('#chips').innerHTML = ['Todos', ...Object.keys(GRUPOS)].map(g => `<button class="chip${g === 'Todos' ? ' on' : ''}">${g}</button>`).join('');
     renderDir();
