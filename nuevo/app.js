@@ -16,10 +16,10 @@
 
   const PLANES = {
     bodas: [
-      { n: 'Bronce', h: '5 horas', p: 949, img: 'caminando', items: ['Ceremonia religiosa', 'Salón de recepciones', 'Tomas y vuelo con drone', 'Video cinema · 10 min', 'Video fiesta · 20 min', 'Material fotográfico digital', 'Álbum 30×30 · 10 hojas (30–50 fotos)', 'Acceso web · 30 días (opc. 1 año)'], ind: 'Individual: Foto 5h $629 · Video 5h $689 · Hora extra $99' },
-      { n: 'Plata', h: '7 horas', p: 1149, img: 'luces', cubre: ['reel', 'arreglo'], items: ['Arreglo solo novia', 'Ceremonia religiosa', 'Salón de recepciones', 'Tomas y vuelo con drone', 'Video cinema · 12 min', 'Video fiesta · 30 min', 'Video reel · 1 min', 'Material fotográfico digital', 'Álbum 30×30 · 15 hojas (50–70 fotos)', 'Acceso web · 30 días (opc. 1 año)'], ind: 'Individual: Foto 7h $709 · Video 7h $769 · Hora extra $99' },
+      { n: 'Diamante', h: '10 horas', p: 1649, img: 'velo-pasto', tag: 'Premium', cubre: ['reel', 'arreglo', 'std', 'mirror', '360'], items: ['Arreglo de ambos novios', 'Save the Date · Pre o Post boda', 'Ceremonia y recepción', 'Tomas y vuelo con drone', 'Magic Mirror 1h (o cabina 360)', 'Impresiones ilimitadas · marco propio', 'Video cinema · 17 min', 'Video fiesta · 45 min', 'Video redes · 3 min', 'Álbum 30×30 · 25 hojas (90–120 fotos)', 'Caja decorativa para el álbum', 'Acceso web · 30 días (opc. 1 año)'] },
       { n: 'Oro', h: '9 horas', p: 1349, img: 'arco', tag: 'Más elegido', cubre: ['reel', 'arreglo'], items: ['Arreglo de ambos novios', 'Ceremonia religiosa', 'Salón de recepciones', 'Tomas y vuelo con drone', 'Video cinema · 14 min', 'Video fiesta · 35 min', 'Video reel · 2 min', 'Material fotográfico digital', 'Álbum 30×30 · 20 hojas (70–90 fotos)', 'Acceso web · 30 días (opc. 1 año)'], ind: 'Individual: Foto 9h $819 · Video 9h $879 · Hora extra $99' },
-      { n: 'Diamante', h: '10 horas', p: 1649, img: 'velo-pasto', tag: 'Premium', cubre: ['reel', 'arreglo', 'std', 'mirror', '360'], items: ['Arreglo de ambos novios', 'Save the Date · Pre o Post boda', 'Ceremonia y recepción', 'Tomas y vuelo con drone', 'Magic Mirror 1h (o cabina 360)', 'Impresiones ilimitadas · marco propio', 'Video cinema · 17 min', 'Video fiesta · 45 min', 'Video redes · 3 min', 'Álbum 30×30 · 25 hojas (90–120 fotos)', 'Caja decorativa para el álbum', 'Acceso web · 30 días (opc. 1 año)'] }
+      { n: 'Plata', h: '7 horas', p: 1149, img: 'luces', cubre: ['reel', 'arreglo'], items: ['Arreglo solo novia', 'Ceremonia religiosa', 'Salón de recepciones', 'Tomas y vuelo con drone', 'Video cinema · 12 min', 'Video fiesta · 30 min', 'Video reel · 1 min', 'Material fotográfico digital', 'Álbum 30×30 · 15 hojas (50–70 fotos)', 'Acceso web · 30 días (opc. 1 año)'], ind: 'Individual: Foto 7h $709 · Video 7h $769 · Hora extra $99' },
+      { n: 'Bronce', h: '5 horas', p: 949, img: 'caminando', items: ['Ceremonia religiosa', 'Salón de recepciones', 'Tomas y vuelo con drone', 'Video cinema · 10 min', 'Video fiesta · 20 min', 'Material fotográfico digital', 'Álbum 30×30 · 10 hojas (30–50 fotos)', 'Acceso web · 30 días (opc. 1 año)'], ind: 'Individual: Foto 5h $629 · Video 5h $689 · Hora extra $99' }
     ],
     quince: [
       { n: 'Plata', h: '5 horas', p: 699, img: 'retrato', cubre: ['reel'], items: ['Salón de recepciones', 'Sesión el mismo día del evento', 'Video cinema · 10 min', 'Video fiesta · 20 min', 'Video reel · 1 min', 'Material fotográfico digital', 'Álbum 30×30 · 10 hojas', 'Acceso web con contraseña · 30 días'] },
@@ -273,7 +273,7 @@
       ex.map(x => `<li><span>${x.n}</span><span>${x.inc ? 'Incluido' : '$' + x.p}</span></li>`).join('');
     const tip = $('#sum-tip'), grupo = stt.evento === 'boda' ? PLANES.bodas : PLANES.quince;
     const pagados = ex.filter(x => !x.inc).map(x => x.id);
-    const mejor = stt.servicio === 'fv' && pagados.length > 0 && grupo.find(p => parseInt(p.h) >= stt.horas && p.p < total &&
+    const mejor = stt.servicio === 'fv' && pagados.length > 0 && [...grupo].sort((a, b) => a.p - b.p).find(p => parseInt(p.h) >= stt.horas && p.p < total &&
       pagados.every(id => (p.cubre || []).includes(id)));
     tip.classList.toggle('show', !!mejor);
     if (mejor) tip.innerHTML = `El <b>Plan ${mejor.n}</b> (${mejor.h}) ya incluye lo que elegiste por $${money(mejor.p)}. Ahorras $${money(total - mejor.p)}. <a href="#planes">Ver plan</a>`;
@@ -356,7 +356,10 @@
     // nav
     nav.classList.toggle('solid', y > vh - 90);
     document.body.classList.toggle('in-hero', y < vh * .6);
-    nav.classList.toggle('hide', y > lastY + 2 && y > vh * 1.3 && !document.body.classList.contains('menu-open'));
+    const pr = pList.getBoundingClientRect();
+    const inPlans = innerWidth <= 1080 && pr.top < vh && pr.bottom > 0; // en móvil la foto del plan se pega bajo el menú
+    nav.classList.toggle('hide', y > lastY + 2 && y > vh * 1.3 && !inPlans && !document.body.classList.contains('menu-open'));
+    if (inPlans) nav.classList.remove('hide');
     if (y < lastY - 2) nav.classList.remove('hide');
     lastY = y;
     // hero parallax

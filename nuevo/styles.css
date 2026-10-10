@@ -447,7 +447,7 @@ input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 
   .summary { position: relative; top: 0; }
   .team { grid-template-columns: repeat(3, 1fr); }
   .plans { grid-template-columns: 1fr; gap: 0; }
-  .p-stage { top: 0; z-index: 3; order: -1; background: #fff; padding: calc(var(--nav) + 8px) 0 10px; margin-top: calc(-1 * var(--nav)); }
+  .p-stage { top: var(--nav); z-index: 3; order: -1; background: #fff; padding: 8px 0 10px; }
   .stage { aspect-ratio: 16 / 10; max-height: 34vh; }
   .stage-dots { margin-top: 10px; }
   .p-list { padding: 1vh 0 10vh; }
