@@ -187,6 +187,18 @@
     setFilm(best);
   }, { passive: true });
 
+  /* ═════════ CARRUSELES EL INSTANTE / EL DETALLE ═════════ */
+  $$('.slides').forEach((sl, n) => {
+    const imgs = $$('img', sl), bar = $('.slide-bar i', sl), DUR = 4000;
+    let i = 0, timer = null;
+    const restartBar = () => { sl.classList.remove('run'); void bar.offsetWidth; sl.classList.add('run'); };
+    const next = () => { imgs[i].classList.remove('on'); i = (i + 1) % imgs.length; imgs[i].classList.add('on'); restartBar(); };
+    const tick = () => { next(); timer = setTimeout(tick, DUR); };
+    const start = () => { if (timer || reduce) return; restartBar(); timer = setTimeout(tick, DUR); };
+    const stop = () => { clearTimeout(timer); timer = null; sl.classList.remove('run'); };
+    setTimeout(() => new IntersectionObserver(es => es.forEach(e => e.isIntersecting ? start() : stop()), { threshold: .3 }).observe(sl), n * 2000); // desfasados
+  });
+
   /* ═════════ REEL BANDA ═════════ */
   const band = $('#band-reel'), bandV = $('video', band);
   new IntersectionObserver(es => es.forEach(e => {

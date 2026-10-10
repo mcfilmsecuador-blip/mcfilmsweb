@@ -183,8 +183,16 @@ main > .panel.glassy { background: transparent; border-radius: var(--rr, 0) var(
 .ed-pair { display: grid; grid-template-columns: 5fr 4fr; gap: clamp(16px, 3vw, 40px); margin-top: clamp(80px, 10vw, 140px); align-items: start; }
 .ed-pair figure:nth-child(2) { margin-top: clamp(80px, 14vw, 220px); }
 .ed-pair .pic { overflow: hidden; }
-.ed-pair img { width: 100%; height: auto; transition: transform 1.6s var(--ease); }
-.ed-pair figure:hover img { transform: scale(1.04); }
+/* Carrusel lento: fundido + zoom suave tipo cine */
+.slides { position: relative; background: var(--bg2); }
+.slides.h { aspect-ratio: 3 / 2; }
+.slides.v { aspect-ratio: 2 / 3; }
+.slides img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.08); transition: opacity 1.4s ease, transform 6s linear; }
+.slides img.on { opacity: 1; transform: scale(1); }
+.slide-bar { position: absolute; left: 14px; right: 14px; bottom: 12px; height: 2px; background: rgba(255, 255, 255, .35); z-index: 2; overflow: hidden; }
+.slide-bar i { position: absolute; inset: 0; background: #fff; transform-origin: left; transform: scaleX(0); }
+.slides.run .slide-bar i { animation: slideBar 4s linear forwards; }
+@keyframes slideBar { to { transform: scaleX(1); } }
 .ed-pair figcaption { margin-top: 16px; }
 .ed-pair figcaption b { display: block; font-family: var(--f-d); font-weight: 600; font-size: 20px; text-transform: uppercase; letter-spacing: .04em; color: var(--ink); margin-bottom: 4px; }
 .ed-title { margin-top: clamp(90px, 12vw, 160px); display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; margin-bottom: clamp(40px, 5vw, 60px); }
