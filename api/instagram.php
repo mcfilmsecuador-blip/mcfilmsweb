@@ -17,6 +17,20 @@ $empty = '{"data":[]}';
 if (is_file($cacheFile) && time() - filemtime($cacheFile) < 3600) { readfile($cacheFile); exit; }
 $fallback = function () use ($cacheFile, $empty) { echo is_file($cacheFile) ? file_get_contents($cacheFile) : $empty; exit; };
 
+// Diagnóstico temporal sin datos sensibles: ?diag=1
+if (isset($_GET['diag'])) {
+  $info = ['docroot' => $_SERVER['DOCUMENT_ROOT'], 'busca' => $tokenFiles, 'existe' => array_map('is_file', $tokenFiles), 'cache' => is_file($cacheFile)];
+  foreach ($tokenFiles as $f) if (is_file($f)) {
+    $r = trim(file_get_contents($f)); $j = json_decode($r, true);
+    $info['largo'] = strlen($r); $info['formato'] = is_array($j) ? implode(',', array_keys($j)) : (substr($r, 0, 3) . '…');
+    $t = is_array($j) ? ($j['page_token'] ?? $j['token'] ?? '') : $r;
+    $ch = curl_init('https://graph.facebook.com/v21.0/me?fields=id,name&access_token=' . urlencode($t)); curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); $b = json_decode(curl_exec($ch), true);
+    $info['meta'] = isset($b['error']) ? $b['error']['message'] : ($b['name'] ?? 'ok');
+    break;
+  }
+  echo json_encode($info, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES); exit;
+}
+
 $tokenFile = null;
 foreach ($tokenFiles as $f) { if (is_file($f)) { $tokenFile = $f; break; } }
 $raw = $tokenFile ? trim(file_get_contents($tokenFile)) : '';
