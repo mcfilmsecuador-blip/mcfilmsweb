@@ -368,10 +368,12 @@ input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 
 
 /* Instagram tipo feed: 9 publicaciones y al bajar el feed sube hasta 18 */
 .ig-sec { height: 230vh; }
-.igf-pin { position: sticky; top: 0; height: 100vh; height: 100svh; display: flex; align-items: center; overflow: hidden; padding-top: var(--nav); }
+.igf-pin { position: sticky; top: 0; height: 100vh; height: 100svh; display: flex; align-items: center; justify-content: center; overflow: hidden; padding-top: var(--nav); }
 .igf > * { min-width: 0; }
-.igf { width: 100%; display: grid; grid-template-columns: 1fr 470px; gap: clamp(30px, 6vw, 100px); align-items: center; }
-.igf-phone { background: #fff; border: 1px solid var(--line); border-radius: 30px; padding: 22px 18px 18px; box-shadow: 0 40px 90px -40px rgba(0, 0, 0, .35); }
+.igf { position: relative; z-index: 2; width: 100%; display: flex; justify-content: center; }
+.igf-phone { width: min(470px, 100%); border-radius: 34px; padding: 22px 18px 18px; }
+.igf-phone .igf-view { border-radius: 10px; }
+.igf-phone .igf-hl i { border-color: rgba(255,255,255,.8); }
 .igf-top { display: flex; align-items: center; gap: 22px; }
 .igf-top .ig-av { width: 82px; height: 82px; flex: none; }
 .igf-stats { flex: 1; display: flex; justify-content: space-around; text-align: center; font-size: 12px; color: var(--ink2); }
@@ -397,8 +399,8 @@ input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 
 .wall-sec { height: 220vh; }
 .wall-pin { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; display: grid; place-items: center; }
 .wall { transform: rotate(6deg); }
-.wall .ig-col span { aspect-ratio: 4 / 5; border-radius: 20px; overflow: hidden; display: block; background: var(--bg2); }
-.wall .ig-col img { width: 100%; height: 100%; object-fit: cover; }
+.ig-col span { aspect-ratio: 4 / 5; border-radius: 20px; overflow: hidden; display: block; background: var(--bg2); }
+.ig-col img { width: 100%; height: 100%; object-fit: cover; }
 .wall-card { position: relative; z-index: 2; width: min(980px, calc(100vw - 40px)); border-radius: 36px; padding: clamp(30px, 4vw, 54px); text-align: center; opacity: 0; }
 .wall-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 26px; }
 .wall-item b { display: block; font-family: var(--f-d); font-weight: 500; font-size: clamp(54px, 6.4vw, 96px); line-height: .95; text-transform: uppercase; }
@@ -595,15 +597,13 @@ input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 
   .ig-cols { grid-template-columns: repeat(3, 1fr); gap: 10px; inset: -25% -20%; }
   .ig-col { gap: 10px; }
   .ig-col:nth-child(n+4) { display: none; }
-  .igf { grid-template-columns: 1fr; }
-  .igf-copy { display: none; }
-  .igf-phone { padding: 16px 12px 12px; border-radius: 24px; }
+  .igf-phone { padding: 16px 12px 12px; border-radius: 26px; }
   .igf-top .ig-av { width: 70px; height: 70px; }
   .igf-hl i { width: 52px; height: 52px; }
   .igf-hl a { width: 54px; }
   .wall-grid { grid-template-columns: 1fr; gap: 22px; }
   .wall-card { padding: 30px 24px; }
-  .ig-col a { border-radius: 14px; }
+  .ig-col span { border-radius: 14px; }
   .dir { grid-template-columns: 1fr; gap: 10px; }
   .prov { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 12px 14px; padding: 18px; }
   .prov-tx { flex: 1; min-width: 0; }

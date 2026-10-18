@@ -353,6 +353,10 @@
   const IGF = ['abrazo-madera', 'anillos-flores', 'caminando-salon', 'puerta', 'auto-risas', 'anillos-luz', 'arco-piedra', 'retrato-velo', 'zapatos-votos',
     'catedral', 'velo-pasto', 'amigos', 'altar', 'lago', 'anillos-libro', 'fiesta', 'jardin', 'petalos'];
   const igGrid = $('#igf-grid'), igSec = $('.ig-sec');
+  // Muro de fotos inclinado detrás del cristal
+  const igCols = $('#ig-cols');
+  igCols.innerHTML = [0, 1, 2, 3, 4].map(c => `<div class="ig-col">${[0, 1, 2, 3, 4, 5].map(r => `<span><img src="assets/img/${IGF[(c * 4 + r * 3) % IGF.length]}-s.webp" alt="" loading="lazy" decoding="async"></span>`).join('')}</div>`).join('');
+  const igColEls = $$('.ig-col', igCols);
   const renderFeed = posts => { igGrid.innerHTML = posts.slice(0, 18).map(p => `<a href="${p.url}" target="_blank" rel="noopener" aria-label="Ver publicación en Instagram"><img src="${p.img}" alt="Publicación de MCFILMS en Instagram" loading="lazy" decoding="async" referrerpolicy="no-referrer">${p.video ? icReel : ''}</a>`).join(''); };
   renderFeed(IGF.map(n => ({ img: `assets/img/${n}-s.webp`, url: IG })));
   $('#igf-hl').innerHTML = [['Wedding', 'lago'], ['Destino', 'montana'], ['Team', 'amigos'], ['Quince', 'retrato'], ['Momentos', 'risas'], ['Tips', 'anillos-luz']]
@@ -483,6 +487,7 @@
       const p = clamp(-gr.top / (igSec.offsetHeight - vh));
       const view = igGrid.parentElement.offsetHeight, dist = Math.max(0, igGrid.offsetHeight - view);
       igGrid.style.transform = `translate3d(0,${-easeIO(clamp((p - .12) / .76)) * dist}px,0)`;
+      igColEls.forEach((c, i) => { c.style.transform = `translate3d(0,${(i % 2 ? 1 : -1) * (p - .5) * 260}px,0)`; });
     }
     if (hv.currentSrc) { if ($('#hero')._cov) hv.pause(); else if (hv.paused && !document.hidden) hv.play().catch(() => {}); }
     if (band._cov && !bandV.paused) bandV.pause();
