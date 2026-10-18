@@ -358,7 +358,7 @@
   $('#igf-hl').innerHTML = [['Wedding', 'lago'], ['Destino', 'montana'], ['Team', 'amigos'], ['Quince', 'retrato'], ['Momentos', 'risas'], ['Tips', 'anillos-luz']]
     .map(([t, n]) => `<a href="${IG}" target="_blank" rel="noopener"><i><img src="assets/img/${n}-s.webp" alt="" loading="lazy"></i>${t}</a>`).join('');
   // Publicaciones reales de @mcfilms.ec (api/instagram.php). Si la API no responde, se quedan las fotos del portafolio.
-  fetch('api/instagram.php').then(r => r.ok ? r.json() : null).then(d => {
+  fetch('api/instagram.php?h=' + Math.floor(Date.now() / 36e5)).then(r => r.ok ? r.json() : null).then(d => {
     if (!d || !d.data || d.data.length < 9) return;
     renderFeed(d.data);
     const k = n => n >= 1000 ? (n / 1000).toFixed(n >= 10000 ? 0 : 1).replace('.0', '') + 'K' : n;

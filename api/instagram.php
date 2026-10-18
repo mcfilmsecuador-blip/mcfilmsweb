@@ -15,7 +15,7 @@ $cacheFile = __DIR__ . '/.ig_cache.json';
 $empty = '{"data":[]}';
 
 if (is_file($cacheFile) && time() - filemtime($cacheFile) < 3600) { readfile($cacheFile); exit; }
-$fallback = function () use ($cacheFile, $empty) { echo is_file($cacheFile) ? file_get_contents($cacheFile) : $empty; exit; };
+$fallback = function () use ($cacheFile, $empty) { header('Cache-Control: no-store'); echo is_file($cacheFile) ? file_get_contents($cacheFile) : $empty; exit; };
 
 // Diagnóstico temporal sin datos sensibles: ?diag=1
 if (isset($_GET['diag'])) {
