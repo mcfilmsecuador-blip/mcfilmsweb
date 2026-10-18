@@ -362,21 +362,35 @@ input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 
 .crew .p-item.on .c-tags span:first-child { background: var(--y); border-color: var(--y); }
 
 /* Instagram: muro en movimiento + tarjeta de cristal */
-.ig-sec { position: relative; height: 112vh; height: 112svh; min-height: 680px; overflow: hidden; display: grid; place-items: center; }
 .ig-cols { position: absolute; inset: -25% -8%; display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; transform: rotate(-7deg); }
 .ig-col { display: flex; flex-direction: column; gap: 14px; will-change: transform; }
-.ig-col a { aspect-ratio: 4 / 5; border-radius: 20px; overflow: hidden; background: var(--bg2); display: block; }
-.ig-col img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
-.ig-col a:hover img { transform: scale(1.06); }
 .ig-veil { position: absolute; inset: 0; background: radial-gradient(60% 55% at 50% 50%, rgba(255,255,255,.55), rgba(255,255,255,0) 70%); pointer-events: none; }
-.ig-card { position: relative; z-index: 2; width: min(440px, calc(100vw - 40px)); border-radius: 34px; padding: 38px 32px 32px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 14px; }
-.ig-card .ig-av { width: 82px; height: 82px; }
-.ig-handle { font-family: var(--f-d); font-weight: 600; font-size: 30px; letter-spacing: .02em; }
-.ig-stats { display: flex; gap: 26px; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink2); }
-.ig-stats b { display: block; font-family: var(--f-d); font-weight: 500; font-size: 28px; letter-spacing: 0; color: var(--ink); line-height: 1.1; }
-.ig-card p { font-size: 15px; color: var(--ink2); max-width: 34ch; }
-.ig-btns { display: flex; gap: 8px; margin-top: 6px; }
-.ig-btns .btn { height: 46px; padding: 0 22px; font-size: 15px; }
+
+/* Instagram tipo feed: 9 publicaciones y al bajar el feed sube hasta 18 */
+.ig-sec { height: 230vh; }
+.igf-pin { position: sticky; top: 0; height: 100vh; height: 100svh; display: flex; align-items: center; overflow: hidden; padding-top: var(--nav); }
+.igf > * { min-width: 0; }
+.igf { width: 100%; display: grid; grid-template-columns: 1fr 470px; gap: clamp(30px, 6vw, 100px); align-items: center; }
+.igf-phone { background: #fff; border: 1px solid var(--line); border-radius: 30px; padding: 22px 18px 18px; box-shadow: 0 40px 90px -40px rgba(0, 0, 0, .35); }
+.igf-top { display: flex; align-items: center; gap: 22px; }
+.igf-top .ig-av { width: 82px; height: 82px; flex: none; }
+.igf-stats { flex: 1; display: flex; justify-content: space-around; text-align: center; font-size: 12px; color: var(--ink2); }
+.igf-stats b { display: block; font-size: 18px; font-weight: 600; color: var(--ink); letter-spacing: -.02em; }
+.igf-bio { margin-top: 14px; display: flex; flex-direction: column; font-size: 14px; line-height: 1.45; }
+.igf-bio b { font-weight: 600; }
+.igf-bio span { color: var(--ink2); }
+.igf-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 14px; }
+.igf-btns .btn { height: 38px; padding: 0 12px; font-size: 14px; border-radius: 10px; }
+.igf-hl { display: flex; gap: 14px; margin: 16px 0 14px; overflow: hidden; }
+.igf-hl a { display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 11px; color: var(--ink2); flex: none; width: 62px; }
+.igf-hl i { width: 60px; height: 60px; border-radius: 50%; padding: 2px; border: 1px solid var(--line); display: block; }
+.igf-hl img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+.igf-view { position: relative; overflow: hidden; aspect-ratio: 1; border-radius: 4px; }
+.igf-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; will-change: transform; }
+.igf-grid a { position: relative; aspect-ratio: 1; overflow: hidden; background: var(--bg2); display: block; }
+.igf-grid img { width: 100%; height: 100%; object-fit: cover; transition: transform .9s var(--ease), opacity .4s; }
+.igf-grid a:hover img { transform: scale(1.06); opacity: .88; }
+.igf-grid svg { position: absolute; top: 8px; right: 8px; color: #fff; filter: drop-shadow(0 1px 3px rgba(0,0,0,.5)); }
 .pod-sec .pod { min-height: 0; }
 
 /* Cifras sobre muro de fotos */
@@ -581,6 +595,12 @@ input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 
   .ig-cols { grid-template-columns: repeat(3, 1fr); gap: 10px; inset: -25% -20%; }
   .ig-col { gap: 10px; }
   .ig-col:nth-child(n+4) { display: none; }
+  .igf { grid-template-columns: 1fr; }
+  .igf-copy { display: none; }
+  .igf-phone { padding: 16px 12px 12px; border-radius: 24px; }
+  .igf-top .ig-av { width: 70px; height: 70px; }
+  .igf-hl i { width: 52px; height: 52px; }
+  .igf-hl a { width: 54px; }
   .wall-grid { grid-template-columns: 1fr; gap: 22px; }
   .wall-card { padding: 30px 24px; }
   .ig-col a { border-radius: 14px; }

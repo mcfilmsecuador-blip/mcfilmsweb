@@ -347,25 +347,23 @@
   /* ═════════ EQUIPO / TESTIMONIOS / IG ═════════ */
   const q = QUOTES.map(([t, n, c]) => `<blockquote class="quote"><div class="stars">★★★★★</div><p>“${t}”</p><footer><b>${n}</b>${c}</footer></blockquote>`).join('');
   $('#quotes').innerHTML = q + q;
-  // Instagram: columnas que se mueven en sentidos opuestos al hacer scroll
-  const IGF = ['bosque', 'auto', 'calle', 'jardin', 'bota', 'hindu', 'risas', 'anillos', 'retrato', 'novia-ventana', 'fiesta', 'escalera', 'paramo', 'abrazo-velo', 'petalos'];
-  const igCols = $('#ig-cols');
-  igCols.innerHTML = [0, 1, 2, 3, 4].map(c => `<div class="ig-col">${[0, 1, 2, 3, 4, 5].map(r => {
-    const n = IGF[(c * 3 + r * 2) % IGF.length];
-    return `<a href="https://www.instagram.com/mcfilms.ec/" target="_blank" rel="noopener" aria-label="Ver en Instagram"><img src="assets/img/${n}-s.webp" alt="" loading="lazy" decoding="async"></a>`;
-  }).join('')}</div>`).join('');
-  const igColEls = $$('.ig-col', igCols);
+  // Instagram tipo feed: 9 publicaciones visibles; al bajar, el feed se desliza hasta 18
+  const IG = 'https://www.instagram.com/mcfilms.ec/';
+  const icReel = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+  const IGF = ['abrazo-madera', 'anillos-flores', 'caminando-salon', 'puerta', 'auto-risas', 'anillos-luz', 'arco-piedra', 'retrato-velo', 'zapatos-votos',
+    'catedral', 'velo-pasto', 'amigos', 'altar', 'lago', 'anillos-libro', 'fiesta', 'jardin', 'petalos'];
+  const igGrid = $('#igf-grid'), igSec = $('.ig-sec');
+  const renderFeed = posts => { igGrid.innerHTML = posts.slice(0, 18).map(p => `<a href="${p.url}" target="_blank" rel="noopener" aria-label="Ver publicación en Instagram"><img src="${p.img}" alt="Publicación de MCFILMS en Instagram" loading="lazy" decoding="async" referrerpolicy="no-referrer">${p.video ? icReel : ''}</a>`).join(''); };
+  renderFeed(IGF.map(n => ({ img: `assets/img/${n}-s.webp`, url: IG })));
+  $('#igf-hl').innerHTML = [['Wedding', 'lago'], ['Destino', 'montana'], ['Team', 'amigos'], ['Quince', 'retrato'], ['Momentos', 'risas'], ['Tips', 'anillos-luz']]
+    .map(([t, n]) => `<a href="${IG}" target="_blank" rel="noopener"><i><img src="assets/img/${n}-s.webp" alt="" loading="lazy"></i>${t}</a>`).join('');
   // Publicaciones reales de @mcfilms.ec (api/instagram.php). Si la API no responde, se quedan las fotos del portafolio.
   fetch('api/instagram.php').then(r => r.ok ? r.json() : null).then(d => {
-    if (!d || !d.data || d.data.length < 6) return;
-    const posts = d.data;
-    igCols.innerHTML = [0, 1, 2, 3, 4].map(c => `<div class="ig-col">${[0, 1, 2, 3, 4, 5].map(r => {
-      const p = posts[(c * 6 + r) % posts.length];
-      return `<a href="${p.url}" target="_blank" rel="noopener" aria-label="Ver publicación en Instagram"><img src="${p.img}" alt="Publicación de MCFILMS en Instagram" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a>`;
-    }).join('')}</div>`).join('');
-    igColEls.splice(0, igColEls.length, ...$$('.ig-col', igCols));
-    const f = d.profile && d.profile.followers;
-    if (f) $('#ig-followers').textContent = f >= 1000 ? (f / 1000).toFixed(f >= 10000 ? 0 : 1).replace('.0', '') + 'K' : f;
+    if (!d || !d.data || d.data.length < 9) return;
+    renderFeed(d.data);
+    const k = n => n >= 1000 ? (n / 1000).toFixed(n >= 10000 ? 0 : 1).replace('.0', '') + 'K' : n;
+    if (d.profile && d.profile.followers) $('#ig-followers').textContent = k(d.profile.followers);
+    if (d.profile && d.profile.posts) $('#ig-posts').textContent = k(d.profile.posts);
   }).catch(() => {});
   const wallCols = $('#wall-cols'), wallSec = $('.wall-sec');
   const WF = ['catedral', 'caminando', 'luces', 'arco', 'velo-pasto', 'montana', 'amigos', 'altar', 'retrato-velo', 'lago', 'calle', 'jardin', 'auto', 'petalos', 'abrazo-velo'];
@@ -479,11 +477,12 @@
         it.style.opacity = q; it.style.transform = `translate3d(0,${(1 - q) * 34}px,0)`; it.style.filter = q < 1 ? `blur(${((1 - q) * 10).toFixed(1)}px)` : '';
       });
     }
-    // Instagram: columnas en paralaje
-    const ir = igCols.getBoundingClientRect();
-    if (!reduce && ir.top < vh && ir.bottom > 0) {
-      const k = (ir.top + ir.height / 2 - vh / 2) / vh;
-      igColEls.forEach((c, i) => { c.style.transform = `translate3d(0,${(i % 2 ? 1 : -1) * k * 160 - 80}px,0)`; });
+    // Instagram: el feed sube como si estuvieras navegando el perfil
+    const gr = igSec.getBoundingClientRect();
+    if (gr.top < vh && gr.bottom > 0) {
+      const p = clamp(-gr.top / (igSec.offsetHeight - vh));
+      const view = igGrid.parentElement.offsetHeight, dist = Math.max(0, igGrid.offsetHeight - view);
+      igGrid.style.transform = `translate3d(0,${-easeIO(clamp((p - .12) / .76)) * dist}px,0)`;
     }
     if (hv.currentSrc) { if ($('#hero')._cov) hv.pause(); else if (hv.paused && !document.hidden) hv.play().catch(() => {}); }
     if (band._cov && !bandV.paused) bandV.pause();
