@@ -1,0 +1,4 @@
+# El token y la caché no se sirven por la web
+<FilesMatch "^\.ig_">
+  Require all denied
+</FilesMatch>

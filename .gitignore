@@ -21,3 +21,7 @@ backup_originals/
 *.log
 temp_*
 .claude/
+
+# Instagram (token y caché viven solo en el servidor)
+api/.ig_token
+api/.ig_cache.json

@@ -12,7 +12,7 @@
   const money = n => n.toLocaleString('en-US');
   const conn = navigator.connection || {};
   const lowData = conn.saveData || /2g|3g/.test(conn.effectiveType || '');
-  const img = (n, alt = '', cls = '') => `<img class="${cls}" src="img/${n}-s.webp" srcset="img/${n}-s.webp 1100w, img/${n}.webp 2400w" sizes="(max-width: 1080px) 100vw, 50vw" alt="${alt}" loading="lazy" decoding="async">`;
+  const img = (n, alt = '', cls = '') => `<img class="${cls}" src="assets/img/${n}-s.webp" srcset="assets/img/${n}-s.webp 1100w, assets/img/${n}.webp 2400w" sizes="(max-width: 1080px) 100vw, 50vw" alt="${alt}" loading="lazy" decoding="async">`;
 
   /* ═════════ DATOS (editar aquí) ═════════ */
 
@@ -159,9 +159,9 @@
   /* ═════════ PELÍCULAS ═════════ */
   const track = $('#track');
   track.innerHTML = FILMS.map(([f, n, t], i) => `
-    <article class="film" data-src="../Galeria%20Videos/${enc(f)}" tabindex="0" role="button" aria-label="Ver película de ${n}">
+    <article class="film" data-src="Galeria%20Videos/${enc(f)}" tabindex="0" role="button" aria-label="Ver película de ${n}">
       <div class="film-v">
-        <video muted loop playsinline preload="metadata" src="../Galeria%20Videos/previews/${enc(f)}#t=1"></video>
+        <video muted loop playsinline preload="metadata" src="Galeria%20Videos/previews/${enc(f)}#t=1"></video>
         <span class="play-sq"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4v16l13-8z"/></svg></span>
       </div>
       <div class="film-t"><b>${n}</b><span>${t}</span></div>
@@ -282,7 +282,7 @@
           <p class="c-bio">${m.bio}</p>
           <div class="c-tags">${m.tags.map(t => `<span>${t}</span>`).join('')}</div>
         </div>
-      </li>`, TEAM.map(m => `<img src="img/${m.img}.webp" alt="${m.n}, ${m.r} en MCFILMS" loading="lazy" decoding="async">`));
+      </li>`, TEAM.map(m => `<img src="assets/img/${m.img}.webp" alt="${m.n}, ${m.r} en MCFILMS" loading="lazy" decoding="async">`));
 
   /* ═════════ ARMA TU PLAN ═════════ */
   const stt = { evento: 'boda', servicio: 'fv', horas: 7, extras: new Set(['drone']) };
@@ -352,12 +352,24 @@
   const igCols = $('#ig-cols');
   igCols.innerHTML = [0, 1, 2, 3, 4].map(c => `<div class="ig-col">${[0, 1, 2, 3, 4, 5].map(r => {
     const n = IGF[(c * 3 + r * 2) % IGF.length];
-    return `<a href="https://www.instagram.com/mcfilms_ecuador/" target="_blank" rel="noopener" aria-label="Ver en Instagram"><img src="img/${n}-s.webp" alt="" loading="lazy" decoding="async"></a>`;
+    return `<a href="https://www.instagram.com/mcfilms.ec/" target="_blank" rel="noopener" aria-label="Ver en Instagram"><img src="assets/img/${n}-s.webp" alt="" loading="lazy" decoding="async"></a>`;
   }).join('')}</div>`).join('');
   const igColEls = $$('.ig-col', igCols);
+  // Publicaciones reales de @mcfilms.ec (api/instagram.php). Si la API no responde, se quedan las fotos del portafolio.
+  fetch('api/instagram.php').then(r => r.ok ? r.json() : null).then(d => {
+    if (!d || !d.data || d.data.length < 6) return;
+    const posts = d.data;
+    igCols.innerHTML = [0, 1, 2, 3, 4].map(c => `<div class="ig-col">${[0, 1, 2, 3, 4, 5].map(r => {
+      const p = posts[(c * 6 + r) % posts.length];
+      return `<a href="${p.url}" target="_blank" rel="noopener" aria-label="Ver publicación en Instagram"><img src="${p.img}" alt="Publicación de MCFILMS en Instagram" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a>`;
+    }).join('')}</div>`).join('');
+    igColEls.splice(0, igColEls.length, ...$$('.ig-col', igCols));
+    const f = d.profile && d.profile.followers;
+    if (f) $('#ig-followers').textContent = f >= 1000 ? (f / 1000).toFixed(f >= 10000 ? 0 : 1).replace('.0', '') + 'K' : f;
+  }).catch(() => {});
   const wallCols = $('#wall-cols'), wallSec = $('.wall-sec');
   const WF = ['catedral', 'caminando', 'luces', 'arco', 'velo-pasto', 'montana', 'amigos', 'altar', 'retrato-velo', 'lago', 'calle', 'jardin', 'auto', 'petalos', 'abrazo-velo'];
-  wallCols.innerHTML = [0, 1, 2, 3, 4].map(c => `<div class="ig-col">${[0, 1, 2, 3, 4, 5].map(r => `<span><img src="img/${WF[(c * 4 + r * 3) % WF.length]}-s.webp" alt="" loading="lazy" decoding="async"></span>`).join('')}</div>`).join('');
+  wallCols.innerHTML = [0, 1, 2, 3, 4].map(c => `<div class="ig-col">${[0, 1, 2, 3, 4, 5].map(r => `<span><img src="assets/img/${WF[(c * 4 + r * 3) % WF.length]}-s.webp" alt="" loading="lazy" decoding="async"></span>`).join('')}</div>`).join('');
   const wallColEls = $$('.ig-col', wallCols), wallItems = $$('.wall-item', wallSec), wallCard = $('#wall-card');
   $('.wave').innerHTML = Array.from({ length: 32 }, (_, i) => `<i style="animation-delay:${(i * 97 % 1400) / 1000}s"></i>`).join('');
 
@@ -384,7 +396,7 @@
     }).join('') || '<p class="dir-empty">No encontramos proveedores con esa búsqueda.</p>';
     moreBtn.parentElement.style.display = list.length > limit ? '' : 'none';
   };
-  fetch('proveedores.json?v=1791603233').then(r => r.json()).then(d => {
+  fetch('assets/proveedores.json?v=1792337268').then(r => r.json()).then(d => {
     provs = d.map(p => ({ ...p, g: grupoDe(p.cat) }));
     $('#chips').innerHTML = ['Todos', ...Object.keys(GRUPOS)].map(g => `<button class="chip${g === 'Todos' ? ' on' : ''}">${g}</button>`).join('');
     renderDir();
