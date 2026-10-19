@@ -514,8 +514,10 @@
     showcases.forEach(sc => sc.update(vh));
   };
   addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
-  const panels = $$('main > .panel');
+  // Solo las secciones visibles (una oculta mide 0 y descuadraría el apilado de tarjetas).
+  let panels = $$('main > .panel:not([hidden])');
   const setTops = () => panels.forEach(pn => { pn._top = Math.min(0, innerHeight - pn.offsetHeight); pn.style.top = pn._top + 'px'; });
+  addEventListener('mcf:paneles', () => { panels = $$('main > .panel:not([hidden])'); setTops(); observeAll(); onScroll(); });
   addEventListener('resize', () => { setTops(); onScroll(); });
   addEventListener('load', setTops);
   new ResizeObserver(setTops).observe(document.querySelector('main'));

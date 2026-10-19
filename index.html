@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/img/lago-s.webp" imagesrcset="assets/img/lago-s.webp 1100w, assets/img/lago.webp 2400w" imagesizes="100vw" fetchpriority="high">
-<link rel="stylesheet" href="assets/styles.css?v=1792360000">
+<link rel="stylesheet" href="assets/styles.css?v=1792370000">
 
 <script type="application/ld+json">
 {
@@ -333,22 +333,25 @@
   </div>
 </section>
 
-<!-- GALERÍA PÚBLICA: fotos elegidas en McFilms Studio (botón 🌐). Se oculta si no hay ninguna. -->
+<!-- McFILMS GALLERY: fotos elegidas en McFilms Studio («Elegir fotos para la web»). Se oculta si no hay ninguna. -->
 <section class="panel sec gal-pub" id="galeria" hidden>
   <div class="wrap">
-    <div class="sec-head">
+    <div class="gp-head">
       <div>
-        <span class="eyebrow rv">Galería</span>
-        <h2 class="d d-l" style="margin-top:18px">Bodas reales</h2>
-        <p class="lead">Algunas fotos de nuestras parejas, elegidas por nosotros de sus galerías.</p>
+        <span class="eyebrow rv">McFilms Gallery</span>
+        <h2 class="d d-l split" style="margin-top:18px"><span class="ln"><span>McFilms</span></span><span class="ln"><span>Gallery</span></span></h2>
+      </div>
+      <div class="gp-head-r">
+        <p class="lead rv d1">Momentos de nuestras parejas, elegidos de sus galerías privadas. Así se ve la entrega de McFilms.</p>
+        <a class="link rv d2" href="/gallery/">Entra a tu galería →</a>
       </div>
     </div>
     <div class="gp-chips" id="gp-chips"></div>
-    <div class="gp-grid" id="gp-grid"></div>
-    <div class="gp-mas"><button class="btn btn-l" id="gp-mas" type="button" hidden>Ver más fotos</button></div>
+    <div class="gp-stage" id="gp-stage"></div>
+    <div class="gp-mas"><button class="btn btn-l" id="gp-mas" type="button">Ver más momentos</button></div>
   </div>
 </section>
-<div class="gp-lbx" id="gp-lbx" hidden><button class="gp-x" id="gp-x" aria-label="Cerrar">✕</button><button class="gp-a" id="gp-a" aria-label="Anterior">‹</button><img id="gp-img" alt=""><button class="gp-s" id="gp-s" aria-label="Siguiente">›</button><p id="gp-pie"></p></div>
+<div class="gp-lbx" id="gp-lbx" hidden><button class="gp-x" id="gp-x" aria-label="Cerrar">✕</button><button class="gp-a" id="gp-a" aria-label="Anterior">‹</button><figure><img id="gp-img" alt=""><figcaption id="gp-pie"></figcaption></figure><button class="gp-s" id="gp-s" aria-label="Siguiente">›</button></div>
 
 <!-- TESTIMONIOS -->
 <section class="panel sec" aria-label="Testimonios">
@@ -534,7 +537,7 @@
 </div>
 
 <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
-<script src="assets/app.js?v=1792341142" defer></script>
-<script src="assets/galeria-publica.js?v=1" defer></script>
+<script src="assets/app.js?v=1792370000" defer></script>
+<script src="assets/galeria-publica.js?v=2" defer></script>
 </body>
 </html>
