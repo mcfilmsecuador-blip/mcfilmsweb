@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/img/lago-s.webp" imagesrcset="assets/img/lago-s.webp 1100w, assets/img/lago.webp 2400w" imagesizes="100vw" fetchpriority="high">
-<link rel="stylesheet" href="assets/styles.css?v=1792350000">
+<link rel="stylesheet" href="assets/styles.css?v=1792360000">
 
 <script type="application/ld+json">
 {
@@ -107,6 +107,7 @@
 <div class="menu" id="menu">
   <nav aria-label="Menú">
     <a href="#peliculas"><span>Películas</span><small>01</small></a>
+    <a href="#galeria" data-gp><span>Galería</span><small>✦</small></a>
     <a href="#planes"><span>Planes</span><small>02</small></a>
     <a href="#arma-tu-plan"><span>Arma tu plan</span><small>03</small></a>
     <a href="#nosotros"><span>Nosotros</span><small>04</small></a>
@@ -332,6 +333,23 @@
   </div>
 </section>
 
+<!-- GALERÍA PÚBLICA: fotos elegidas en McFilms Studio (botón 🌐). Se oculta si no hay ninguna. -->
+<section class="panel sec gal-pub" id="galeria" hidden>
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow rv">Galería</span>
+        <h2 class="d d-l" style="margin-top:18px">Bodas reales</h2>
+        <p class="lead">Algunas fotos de nuestras parejas, elegidas por nosotros de sus galerías.</p>
+      </div>
+    </div>
+    <div class="gp-chips" id="gp-chips"></div>
+    <div class="gp-grid" id="gp-grid"></div>
+    <div class="gp-mas"><button class="btn btn-l" id="gp-mas" type="button" hidden>Ver más fotos</button></div>
+  </div>
+</section>
+<div class="gp-lbx" id="gp-lbx" hidden><button class="gp-x" id="gp-x" aria-label="Cerrar">✕</button><button class="gp-a" id="gp-a" aria-label="Anterior">‹</button><img id="gp-img" alt=""><button class="gp-s" id="gp-s" aria-label="Siguiente">›</button><p id="gp-pie"></p></div>
+
 <!-- TESTIMONIOS -->
 <section class="panel sec" aria-label="Testimonios">
   <div class="wrap sec-head">
@@ -517,5 +535,6 @@
 
 <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
 <script src="assets/app.js?v=1792341142" defer></script>
+<script src="assets/galeria-publica.js?v=1" defer></script>
 </body>
 </html>

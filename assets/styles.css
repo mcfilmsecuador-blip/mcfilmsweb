@@ -627,3 +627,19 @@ input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 
 .foot-gal-txt em { font-style: normal; font-size: 14px; color: rgba(255,255,255,.7); }
 .foot-gal-ir { position: relative; flex: none; width: clamp(56px, 7vw, 84px); aspect-ratio: 1; border-radius: 50%; background: var(--y, #f6bb39); color: #0b0b0c; display: grid; place-items: center; font-size: clamp(24px, 3vw, 34px); transition: transform .5s cubic-bezier(.2,.8,.2,1); }
 .foot-gal:hover .foot-gal-ir { transform: rotate(-45deg); }
+/* Galería pública (fotos elegidas en McFilms Studio) */
+.gp-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 26px; }
+.gp-chips button { padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); background: transparent; font: inherit; font-size: 14px; cursor: pointer; }
+.gp-chips button.on { background: var(--ink); color: #fff; border-color: var(--ink); }
+.gp-grid { columns: 3 260px; column-gap: 12px; }
+.gp-it { display: block; width: 100%; margin: 0 0 12px; padding: 0; border: 0; border-radius: 14px; overflow: hidden; background: var(--line); cursor: zoom-in; break-inside: avoid; }
+.gp-it img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0; transform: scale(1.03); transition: opacity .6s, transform 1.2s cubic-bezier(.2,.8,.2,1); }
+.gp-it.ok img { opacity: 1; transform: none; }
+.gp-it:hover img { transform: scale(1.03); }
+.gp-mas { text-align: center; margin-top: 24px; }
+.gp-lbx { position: fixed; inset: 0; z-index: 200; background: rgba(8,8,9,.95); display: grid; place-items: center; }
+.gp-lbx[hidden] { display: none; }
+.gp-lbx img { max-width: 92vw; max-height: 84vh; object-fit: contain; }
+.gp-lbx p { position: absolute; bottom: 18px; left: 0; right: 0; text-align: center; color: rgba(255,255,255,.75); font-size: 14px; letter-spacing: .08em; text-transform: uppercase; }
+.gp-lbx button { position: absolute; background: rgba(255,255,255,.12); color: #fff; border: 0; width: 48px; height: 48px; border-radius: 50%; font-size: 26px; cursor: pointer; }
+.gp-x { top: 18px; right: 18px; font-size: 18px !important; } .gp-a { left: 18px; top: 50%; } .gp-s { right: 18px; top: 50%; }
