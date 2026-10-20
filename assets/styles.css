@@ -652,3 +652,12 @@ input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 
 .gp-lbx button { position: absolute; background: rgba(255,255,255,.12); color: #fff; border: 0; width: 50px; height: 50px; border-radius: 50%; font-size: 26px; cursor: pointer; }
 .gp-x { top: 18px; right: 18px; font-size: 18px !important; } .gp-a { left: 18px; top: 50%; } .gp-s { right: 18px; top: 50%; }
 @media (max-width: 760px) { .gp-head { grid-template-columns: 1fr; } .gp-stage { --gp-cols: 2; } }
+
+/* McTools: el plugin de MCFILMS para editores */
+.mct { display: grid; grid-template-columns: 1fr 1.2fr; gap: clamp(24px, 5vw, 72px); align-items: center; background: var(--ink); color: #fff; padding: clamp(24px, 4vw, 56px); }
+.mct-txt p { color: rgba(255, 255, 255, .78); margin: 16px 0 28px; max-width: 520px; }
+.mct .eyebrow { color: rgba(255, 255, 255, .7); }
+.mct-img { display: block; overflow: hidden; }
+.mct-img img { width: 100%; height: auto; display: block; transition: transform 1s cubic-bezier(.2, .7, .2, 1); }
+.mct-img:hover img { transform: scale(1.04); }
+@media (max-width: 760px) { .mct { grid-template-columns: 1fr; } .mct-img { order: -1; } }
