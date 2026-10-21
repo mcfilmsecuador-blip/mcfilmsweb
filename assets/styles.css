@@ -101,11 +101,12 @@ main > .panel.glassy { background: transparent; border-radius: var(--rr, 0) var(
 .nav.solid { background: rgba(255, 255, 255, .92); backdrop-filter: saturate(180%) blur(18px); -webkit-backdrop-filter: saturate(180%) blur(18px); color: var(--ink); border-color: var(--line); }
 .nav.hide { transform: translateY(-100%); }
 .menu-btn { display: inline-flex; align-items: center; gap: 14px; justify-self: start; font-family: var(--f-d); font-weight: 600; letter-spacing: .14em; font-size: 15px; text-transform: uppercase; height: 44px; }
-.menu-btn i { width: 26px; height: 10px; position: relative; }
+.menu-btn i { width: 26px; height: 14px; position: relative; background: linear-gradient(currentColor, currentColor) center / 100% 1.5px no-repeat; transition: background-size .3s var(--ease); }
 .menu-btn i::before, .menu-btn i::after { content: ""; position: absolute; left: 0; right: 0; height: 1.5px; background: currentColor; transition: transform .5s var(--ease), top .5s var(--ease); }
-.menu-btn i::before { top: 0; } .menu-btn i::after { top: 8px; }
-.menu-open .menu-btn i::before { top: 4px; transform: rotate(45deg); }
-.menu-open .menu-btn i::after { top: 4px; transform: rotate(-45deg); }
+.menu-btn i::before { top: 0; } .menu-btn i::after { top: 12.5px; }
+.menu-open .menu-btn i { background-size: 0 1.5px; }
+.menu-open .menu-btn i::before { top: 6.25px; transform: rotate(45deg); }
+.menu-open .menu-btn i::after { top: 6.25px; transform: rotate(-45deg); }
 .nav-logo { justify-self: center; position: relative; height: 28px; }
 .nav-logo img { height: 28px; width: auto; transition: opacity .45s; }
 .nav-logo .lk { position: absolute; inset: 0; opacity: 0; }
