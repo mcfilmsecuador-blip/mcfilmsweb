@@ -130,10 +130,26 @@
       requestAnimationFrame(raf);
     }
   });
+  // Las secciones van apiladas (sticky): su posición en pantalla no sirve para saltar a ellas.
+  // Se calcula su lugar real sumando la altura de las secciones anteriores.
+  const realTop = el => {
+    if (el.id === 'top') return 0;
+    const main = el.parentElement;
+    if (!main || main.tagName !== 'MAIN') return el.getBoundingClientRect().top + scrollY;
+    let y = main.getBoundingClientRect().top + scrollY;
+    for (const s of main.children) {
+      if (s === el) break;
+      if (s.hidden || getComputedStyle(s).display === 'none') continue;
+      const cs = getComputedStyle(s);
+      y += s.offsetHeight + parseFloat(cs.marginTop) + parseFloat(cs.marginBottom);
+    }
+    return y;
+  };
   const goTo = target => {
-    const el = typeof target === 'string' ? $(target) : target; if (!el) return;
-    if (lenis) lenis.scrollTo(el, { offset: el.id === 'top' ? 0 : -20, duration: 1.4 });
-    else el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+    const el = typeof target === 'string' ? $(target) : target; if (!el || el.hidden) return;
+    const y = realTop(el);
+    if (lenis) lenis.scrollTo(y, { duration: 1.4 });
+    else window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
   };
   document.addEventListener('click', e => {
     const a = e.target.closest('a[href^="#"]'); if (!a || a.getAttribute('href').length < 2) return;
