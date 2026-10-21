@@ -25,3 +25,6 @@ temp_*
 # Instagram (token y caché viven solo en el servidor)
 api/.ig_token
 api/.ig_cache.json
+
+# Podcast (caché del RSS en el servidor)
+api/.podcast_cache.json

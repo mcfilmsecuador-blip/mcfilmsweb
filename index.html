@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/img/lago-s.webp" imagesrcset="assets/img/lago-s.webp 1100w, assets/img/lago.webp 2400w" imagesizes="100vw" fetchpriority="high">
-<link rel="stylesheet" href="assets/styles.css?v=1792370000">
+<link rel="stylesheet" href="assets/styles.css?v=1792600000">
 
 <script type="application/ld+json">
 {
@@ -399,11 +399,27 @@
 <section class="panel sec pod-sec" aria-label="Podcast">
   <div class="wrap">
     <div class="pod rv">
-      <span class="eyebrow">Podcast · Próximamente</span>
+      <span class="eyebrow">Podcast · Ya disponible</span>
       <h3 class="d d-l">Detrás de las bodas</h3>
       <p>Historias reales, proveedores, nervios y risas: todo lo que no se ve el gran día.</p>
       <div class="wave" aria-hidden="true"></div>
-      <a class="btn btn-k" href="https://www.instagram.com/mcfilms.ec/" target="_blank" rel="noopener">Avísame del estreno</a>
+      <div class="pp" id="pp" aria-label="Reproductor del podcast">
+        <div class="pp-ep"><small id="pp-num">Episodio 1</small><b id="pp-title">Get Ready: donde empieza la historia de tu boda</b></div>
+        <div class="pp-bar" id="pp-bar" role="slider" tabindex="0" aria-label="Avance del episodio" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="pp-fill"></i></div>
+        <div class="pp-row">
+          <div class="pp-ctl">
+            <button type="button" class="pp-b" id="pp-prev" aria-label="Episodio anterior"><svg viewBox="0 0 24 24"><path d="M6 5h2v14H6zM20 5v14L9 12z"/></svg></button>
+            <button type="button" class="pp-b pp-play" id="pp-play" aria-label="Reproducir"><svg class="i-play" viewBox="0 0 24 24"><path d="M7 4v16l13-8z"/></svg><svg class="i-pause" viewBox="0 0 24 24"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg></button>
+            <button type="button" class="pp-b" id="pp-next" aria-label="Siguiente episodio"><svg viewBox="0 0 24 24"><path d="M16 5h2v14h-2zM4 5v14l11-7z"/></svg></button>
+          </div>
+          <span class="pp-time" id="pp-time">0:00 / 57:56</span>
+        </div>
+        <div class="pp-links">
+          <a href="https://open.spotify.com/show/3TTDkdlQYaesesw36Tm7I0" target="_blank" rel="noopener">Spotify ↗</a>
+          <a href="https://www.youtube.com/@detrasdelasbodas" target="_blank" rel="noopener">YouTube ↗</a>
+        </div>
+        <audio id="pp-audio" preload="none"></audio>
+      </div>
     </div>
   </div>
 </section>
@@ -513,15 +529,10 @@
       <span class="foot-gal-ir" aria-hidden="true">→</span>
     </a>
     <div class="foot-more" aria-label="Más de MCFILMS">
-      <a class="fm" href="https://www.youtube.com/@detrasdelasbodas" target="_blank" rel="noopener">
-        <small>Podcast · YouTube</small><b>Detrás de las bodas</b><em>Historias reales, proveedores y lo que no se ve el gran día</em><i aria-hidden="true">↗</i>
-      </a>
-      <a class="fm" href="https://open.spotify.com/show/3TTDkdlQYaesesw36Tm7I0" target="_blank" rel="noopener">
-        <small>Podcast · Spotify</small><b>Escúchalo en Spotify</b><em>Detrás de las bodas, para llevar a donde vayas</em><i aria-hidden="true">↗</i>
-      </a>
-      <a class="fm" href="https://plugins.mcfilms.es" target="_blank" rel="noopener">
-        <small>Para editores</small><b>McTools</b><em>El plugin con IA para Premiere Pro que usamos en nuestras películas</em><i aria-hidden="true">↗</i>
-      </a>
+      <span>Más de MCFILMS</span>
+      <a href="https://www.youtube.com/@detrasdelasbodas" target="_blank" rel="noopener"><b>Detrás de las bodas</b> YouTube ↗</a>
+      <a href="https://open.spotify.com/show/3TTDkdlQYaesesw36Tm7I0" target="_blank" rel="noopener"><b>Podcast</b> Spotify ↗</a>
+      <a href="https://plugins.mcfilms.es" target="_blank" rel="noopener"><b>McTools</b> Para editores ↗</a>
     </div>
     <div class="foot-big" aria-hidden="true">MCFILMS<span>.</span></div>
     <div class="foot-row">
@@ -551,7 +562,7 @@
 </div>
 
 <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
-<script src="assets/app.js?v=1792370000" defer></script>
+<script src="assets/app.js?v=1792600000" defer></script>
 <script src="assets/galeria-publica.js?v=2" defer></script>
 </body>
 </html>

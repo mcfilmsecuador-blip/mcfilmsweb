@@ -653,12 +653,38 @@ input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 
 .gp-x { top: 18px; right: 18px; font-size: 18px !important; } .gp-a { left: 18px; top: 50%; } .gp-s { right: 18px; top: 50%; }
 @media (max-width: 760px) { .gp-head { grid-template-columns: 1fr; } .gp-stage { --gp-cols: 2; } }
 
-/* Pie: páginas complementarias (podcast en YouTube y Spotify, McTools) */
-.foot-more { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 0 auto clamp(40px, 6vw, 70px); }
-.fm { position: relative; display: grid; gap: 4px; padding: 24px 26px 26px; border: 1px solid var(--line); border-radius: 22px; color: var(--ink); text-decoration: none; transition: transform .4s cubic-bezier(.2,.8,.2,1), border-color .3s; }
-.fm:hover { transform: translateY(-3px); border-color: var(--y); }
-.fm small { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink2); }
-.fm b { font-family: var(--f-d); font-weight: 600; text-transform: uppercase; font-size: clamp(22px, 2.4vw, 32px); line-height: 1; margin-top: 6px; }
-.fm em { font-style: normal; font-size: 14px; color: var(--ink2); padding-right: 36px; }
-.fm i { position: absolute; top: 20px; right: 20px; width: 34px; height: 34px; border-radius: 50%; background: var(--y); color: #0b0b0c; display: grid; place-items: center; font-style: normal; font-size: 16px; }
-@media (max-width: 760px) { .foot-more { grid-template-columns: 1fr; } }
+/* Pie: páginas complementarias, en botones pequeños uno al lado del otro */
+.foot-more { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px; margin: 0 auto clamp(36px, 5vw, 56px); }
+.foot-more > span { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink2); margin-right: 6px; }
+.foot-more a { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border: 1px solid var(--line); border-radius: 999px; font-size: 13px; color: var(--ink2); text-decoration: none; transition: border-color .3s, background .3s, color .3s; }
+.foot-more a b { color: var(--ink); font-weight: 600; }
+.foot-more a:hover { border-color: var(--y); background: var(--y); color: var(--ink); }
+
+/* Podcast: la tarjeta amarilla es el reproductor (audio del RSS de Spotify for Creators) */
+.pod.playing .wave i { animation-duration: .62s; }
+.pod.playing .wave i:nth-child(3n) { animation-duration: .48s; }
+.pod.playing .wave i:nth-child(4n+1) { animation-duration: .8s; }
+.pod.playing .wave i:nth-child(5n+2) { animation-duration: .4s; }
+.pp { display: grid; gap: 12px; }
+.pp-ep { display: grid; gap: 2px; }
+.pp-ep small { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; opacity: .7; }
+.pp-ep b { font-size: 15px; font-weight: 600; line-height: 1.3; }
+.pp-bar { position: relative; height: 6px; background: rgba(11, 11, 12, .18); cursor: pointer; }
+.pp-bar i { position: absolute; inset: 0 auto 0 0; width: 0; background: var(--ink); }
+.pp-bar:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.pp-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.pp-ctl { display: flex; align-items: center; gap: 8px; }
+.pp-b { width: 38px; height: 38px; border: 0; border-radius: 50%; background: transparent; color: var(--ink); display: grid; place-items: center; cursor: pointer; transition: background .2s, opacity .2s; }
+.pp-b svg { width: 18px; height: 18px; fill: currentColor; }
+.pp-b:hover { background: rgba(11, 11, 12, .1); }
+.pp-b:disabled { opacity: .3; cursor: default; background: transparent; }
+.pp-play { width: 50px; height: 50px; background: var(--ink); color: var(--y); }
+.pp-play:hover { background: #222; }
+.pp-play svg { width: 20px; height: 20px; }
+.pp-play .i-pause, .pod.playing .pp-play .i-play { display: none; }
+.pod.playing .pp-play .i-pause { display: block; }
+.pod.loading .pp-play { opacity: .6; }
+.pp-time { font-size: 13px; font-variant-numeric: tabular-nums; }
+.pp-links { display: flex; gap: 8px; flex-wrap: wrap; }
+.pp-links a { font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; padding: 7px 12px; border: 1px solid rgba(11, 11, 12, .35); border-radius: 999px; color: var(--ink); text-decoration: none; transition: background .2s, color .2s; }
+.pp-links a:hover { background: var(--ink); color: var(--y); }

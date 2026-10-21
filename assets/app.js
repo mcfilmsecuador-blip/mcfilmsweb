@@ -375,6 +375,69 @@
   const wallColEls = $$('.ig-col', wallCols), wallItems = $$('.wall-item', wallSec), wallCard = $('#wall-card');
   $('.wave').innerHTML = Array.from({ length: 32 }, (_, i) => `<i style="animation-delay:${(i * 97 % 1400) / 1000}s"></i>`).join('');
 
+  /* ═════════ PODCAST: la tarjeta amarilla reproduce «Detrás de las bodas» ═════════
+     El audio sale del RSS público de Spotify for Creators (api/podcast.php). Nunca suena solo:
+     arranca con el clic en play; la onda se mueve solo mientras suena. */
+  (() => {
+    const pod = $('.pod'), au = $('#pp-audio');
+    if (!pod || !au) return;
+    let eps = [{ title: 'Get Ready: donde empieza la historia de tu boda', duration: '00:57:56',
+      audio: 'https://anchor.fm/s/1185fdc50/podcast/play/127277711/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-9-11%2Fa4fd7174-d006-0dd0-b4d0-2302813c1049.mp3' }];
+    let cur = 0;
+    const fmt = t => { t = Math.max(0, Math.floor(t || 0)); const h = Math.floor(t / 3600), m = Math.floor(t / 60) % 60, s = t % 60; return (h ? h + ':' + String(m).padStart(2, '0') : m) + ':' + String(s).padStart(2, '0'); };
+    const dur = e => { const p = String(e.duration || '').split(':').map(Number); return p.reduce((a, v) => a * 60 + (v || 0), 0); };
+    const total = () => isFinite(au.duration) && au.duration > 0 ? au.duration : dur(eps[cur]);
+    const paint = () => {
+      const T = total(), pct = T ? au.currentTime / T * 100 : 0;
+      $('#pp-fill').style.width = pct + '%';
+      $('#pp-bar').setAttribute('aria-valuenow', Math.round(pct));
+      $('#pp-time').textContent = fmt(au.currentTime) + ' / ' + fmt(T);
+    };
+    const show = () => {
+      const n = eps.length - cur; // el RSS trae el más nuevo primero
+      $('#pp-num').textContent = 'Episodio ' + n;
+      $('#pp-title').textContent = eps[cur].title;
+      $('#pp-prev').disabled = cur >= eps.length - 1;
+      $('#pp-next').disabled = cur <= 0;
+      paint();
+    };
+    const load = (i, play) => {
+      cur = i; au.src = eps[i].audio; show();
+      if (play) au.play().catch(() => {});
+      if ('mediaSession' in navigator) navigator.mediaSession.metadata = new MediaMetadata({ title: eps[i].title, artist: 'Detrás de las bodas · MCFILMS' });
+    };
+    $('#pp-play').addEventListener('click', () => {
+      if (!au.src) au.src = eps[cur].audio;
+      au.paused ? au.play().catch(() => pod.classList.remove('loading')) : au.pause();
+    });
+    $('#pp-prev').addEventListener('click', () => cur < eps.length - 1 && load(cur + 1, !au.paused));
+    $('#pp-next').addEventListener('click', () => cur > 0 && load(cur - 1, !au.paused));
+    const seek = x => { const r = $('#pp-bar').getBoundingClientRect(), T = total(); if (!T) return; if (!au.src) au.src = eps[cur].audio; au.currentTime = Math.min(1, Math.max(0, (x - r.left) / r.width)) * T; paint(); };
+    $('#pp-bar').addEventListener('click', e => seek(e.clientX));
+    $('#pp-bar').addEventListener('keydown', e => { if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); if (!au.src) au.src = eps[cur].audio; au.currentTime = Math.max(0, au.currentTime + (e.key === 'ArrowRight' ? 15 : -15)); paint(); } });
+    au.addEventListener('play', () => pod.classList.add('playing', 'loading'));
+    au.addEventListener('playing', () => pod.classList.remove('loading'));
+    au.addEventListener('waiting', () => pod.classList.add('loading'));
+    au.addEventListener('pause', () => pod.classList.remove('playing', 'loading'));
+    au.addEventListener('ended', () => { pod.classList.remove('playing'); if (cur > 0) load(cur - 1, true); });
+    au.addEventListener('timeupdate', paint);
+    au.addEventListener('loadedmetadata', paint);
+    au.addEventListener('play', () => $('#pp-play').setAttribute('aria-label', 'Pausar'));
+    au.addEventListener('pause', () => $('#pp-play').setAttribute('aria-label', 'Reproducir'));
+    if ('mediaSession' in navigator) {
+      navigator.mediaSession.setActionHandler('play', () => au.play());
+      navigator.mediaSession.setActionHandler('pause', () => au.pause());
+      navigator.mediaSession.setActionHandler('previoustrack', () => $('#pp-prev').click());
+      navigator.mediaSession.setActionHandler('nexttrack', () => $('#pp-next').click());
+    }
+    show();
+    // Episodios nuevos del RSS; si falla, queda el episodio 1 de arriba.
+    fetch('api/podcast.php?h=' + Math.floor(Date.now() / 36e5)).then(r => r.ok ? r.json() : null).then(d => {
+      if (!d || !d.episodes || !d.episodes.length || !au.paused || au.src) return;
+      eps = d.episodes; cur = 0; show();
+    }).catch(() => {});
+  })();
+
   /* ═════════ DIRECTORIO ═════════ */
   let provs = [], cat = 'Todos', limit = 10;
   const grupoDe = c => Object.keys(GRUPOS).find(g => GRUPOS[g].includes(c)) || 'Más';
