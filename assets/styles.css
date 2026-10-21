@@ -653,11 +653,12 @@ input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 
 .gp-x { top: 18px; right: 18px; font-size: 18px !important; } .gp-a { left: 18px; top: 50%; } .gp-s { right: 18px; top: 50%; }
 @media (max-width: 760px) { .gp-head { grid-template-columns: 1fr; } .gp-stage { --gp-cols: 2; } }
 
-/* McTools: el plugin de MCFILMS para editores */
-.mct { display: grid; grid-template-columns: 1fr 1.2fr; gap: clamp(24px, 5vw, 72px); align-items: center; background: var(--ink); color: #fff; padding: clamp(24px, 4vw, 56px); }
-.mct-txt p { color: rgba(255, 255, 255, .78); margin: 16px 0 28px; max-width: 520px; }
-.mct .eyebrow { color: rgba(255, 255, 255, .7); }
-.mct-img { display: block; overflow: hidden; }
-.mct-img img { width: 100%; height: auto; display: block; transition: transform 1s cubic-bezier(.2, .7, .2, 1); }
-.mct-img:hover img { transform: scale(1.04); }
-@media (max-width: 760px) { .mct { grid-template-columns: 1fr; } .mct-img { order: -1; } }
+/* Pie: páginas complementarias (podcast en YouTube y Spotify, McTools) */
+.foot-more { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 0 auto clamp(40px, 6vw, 70px); }
+.fm { position: relative; display: grid; gap: 4px; padding: 24px 26px 26px; border: 1px solid var(--line); border-radius: 22px; color: var(--ink); text-decoration: none; transition: transform .4s cubic-bezier(.2,.8,.2,1), border-color .3s; }
+.fm:hover { transform: translateY(-3px); border-color: var(--y); }
+.fm small { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink2); }
+.fm b { font-family: var(--f-d); font-weight: 600; text-transform: uppercase; font-size: clamp(22px, 2.4vw, 32px); line-height: 1; margin-top: 6px; }
+.fm em { font-style: normal; font-size: 14px; color: var(--ink2); padding-right: 36px; }
+.fm i { position: absolute; top: 20px; right: 20px; width: 34px; height: 34px; border-radius: 50%; background: var(--y); color: #0b0b0c; display: grid; place-items: center; font-style: normal; font-size: 16px; }
+@media (max-width: 760px) { .foot-more { grid-template-columns: 1fr; } }
