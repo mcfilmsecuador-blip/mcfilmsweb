@@ -16,45 +16,62 @@
 
   /* ═════════ DATOS (editar aquí) ═════════ */
 
+  const STD = 'https://mcfilmsecuador.com/bodas/plantillas';
+  const STD_DEMO = 'https://mcfilmsecuador.com/bodas/jennifer-y-brian';
+  const GAL_DEMO = 'https://mcfilmsecuador.com/gallery/jennifer-brian-save-the-date-pf1i';
+  const GAL_TXT = 'Galería web privada · 60 días (1 año +$99)';
+  // star: plan insignia (etiqueta dorada) · elige: el cliente escoge UNA opción (ids en eligeIds) · links: ejemplos en vivo
   const PLANES = {
     bodas: [
-      { n: 'Diamante', h: '10 horas', p: 1649, img: 'velo-pasto', tag: 'Premium', cubre: ['reel', 'arreglo', 'std', 'mirror', '360'], items: ['Arreglo de ambos novios', 'Save the Date · Pre o Post boda', 'Ceremonia y recepción', 'Tomas y vuelo con drone', 'Magic Mirror 1h (o cabina 360)', 'Impresiones ilimitadas · marco propio', 'Video cinema · 17 min', 'Video fiesta · 45 min', 'Video redes · 3 min', 'Álbum 30×30 · 25 hojas (90–120 fotos)', 'Caja decorativa para el álbum', 'Acceso web · 30 días (opc. 1 año)'] },
-      { n: 'Oro', h: '9 horas', p: 1349, img: 'arco', tag: 'Más elegido', cubre: ['reel', 'arreglo'], items: ['Arreglo de ambos novios', 'Ceremonia religiosa', 'Salón de recepciones', 'Tomas y vuelo con drone', 'Video cinema · 14 min', 'Video fiesta · 35 min', 'Video reel · 2 min', 'Material fotográfico digital', 'Álbum 30×30 · 20 hojas (70–90 fotos)', 'Acceso web · 30 días (opc. 1 año)'], ind: 'Individual: Foto 9h $819 · Video 9h $879 · Hora extra $99' },
-      { n: 'Plata', h: '7 horas', p: 1149, img: 'luces', cubre: ['reel', 'arreglo'], items: ['Arreglo solo novia', 'Ceremonia religiosa', 'Salón de recepciones', 'Tomas y vuelo con drone', 'Video cinema · 12 min', 'Video fiesta · 30 min', 'Video reel · 1 min', 'Material fotográfico digital', 'Álbum 30×30 · 15 hojas (50–70 fotos)', 'Acceso web · 30 días (opc. 1 año)'], ind: 'Individual: Foto 7h $709 · Video 7h $769 · Hora extra $99' },
-      { n: 'Bronce', h: '5 horas', p: 949, img: 'caminando', items: ['Ceremonia religiosa', 'Salón de recepciones', 'Tomas y vuelo con drone', 'Video cinema · 10 min', 'Video fiesta · 20 min', 'Material fotográfico digital', 'Álbum 30×30 · 10 hojas (30–50 fotos)', 'Acceso web · 30 días (opc. 1 año)'], ind: 'Individual: Foto 5h $629 · Video 5h $689 · Hora extra $99' }
+      { n: 'Deluxe', h: '12 horas', p: 2349, img: 'catedral', star: true, tag: 'Insignia · Solo 12 bodas al año', cubre: ['speech', 'express', 'mirror', 'std', 'web', 'galeria', 'mini', 'segundo'],
+        items: ['2 fotógrafos + 2 videógrafos', 'Preparativos de novia y novio en simultáneo', 'Ceremonia religiosa y recepción', 'Tomas aéreas', 'Magic Mirror 1h · impresiones ilimitadas y marco personalizado', 'Save the date (foto + video)', 'Web interactiva del save the date: 14 plantillas o diseño propio, RSVP, invitación con el nombre de cada invitado, en español e inglés', 'Video documental · 20 min', 'Highlight de la fiesta · 45–60 min', 'Video speech (discursos)', 'Entrega express 72h: adelanto de fotos + reel de 1 min', 'Segundo reel de 1 min', 'Todas las fotografías editadas, en digital', 'Álbum 30×30 · 30 hojas (100–120 fotos), tapa premium + caja', '2 mini álbumes para los padres', 'Galería web privada · 1 año', 'Enlace del Magic Mirror'],
+        nota: '<b>Experiencia Deluxe:</b> dirección personal de José Andrés y Xavier Mercado · reunión de planificación del timeline · fecha exclusiva.',
+        links: [['Ver la web save the date', STD_DEMO], ['Ver una galería', GAL_DEMO]] },
+      { n: 'Diamante', h: '10 horas', p: 1729, img: 'velo-pasto', star: true, tag: 'Insignia', cubre: ['speech'], eligeIds: ['mirror', 'std'],
+        items: ['1 fotógrafo + 2 videógrafos', 'Arreglo de los novios', 'Ceremonia religiosa y recepción', 'Tomas aéreas', 'Video documental · 16 min', 'Highlight de la fiesta · 35–45 min', 'Video speech (discursos)', 'Reel de 1 min', 'Todas las fotografías editadas, en digital', 'Álbum 30×30 · 25 hojas (80–100 fotos) + caja', GAL_TXT],
+        elige: ['Magic Mirror 1h (impresiones + marco)', 'Save the date (foto + video)', 'Preboda', 'Posboda'],
+        nota: 'Web interactiva del save the date: <b>+$99</b>.',
+        ind: 'Individual: Foto 10h $979 · Video 10h $1,039 · Hora extra $99',
+        links: [['Ver plantillas save the date', STD], ['Ver una galería', GAL_DEMO]] },
+      { n: 'Oro', h: '8 horas', p: 1419, img: 'arco', tag: 'Más elegido', items: ['1 fotógrafo + 2 videógrafos', 'Arreglo de los novios', 'Ceremonia religiosa y recepción', 'Tomas aéreas', 'Video documental · 14 min', 'Highlight de la fiesta · 25–35 min', 'Reel de 1 min', 'Todas las fotografías editadas, en digital', 'Álbum 30×30 · 20 hojas (60–80 fotos)', GAL_TXT], ind: 'Individual: Foto 8h $859 · Video 8h $919 · Hora extra $99' },
+      { n: 'Plata', h: '7 horas', p: 1199, img: 'luces', items: ['1 fotógrafo + 1 videógrafo', 'Arreglo de la novia', 'Ceremonia religiosa y recepción', 'Tomas aéreas', 'Video documental · 12 min', 'Highlight de la fiesta · 20–25 min', 'Reel de 30 s', 'Todas las fotografías editadas, en digital', 'Álbum 30×30 · 15 hojas (45–60 fotos)', GAL_TXT], ind: 'Individual: Foto 7h $749 · Video 7h $809 · Hora extra $99' },
+      { n: 'Bronce', h: '5 horas', p: 999, img: 'caminando', items: ['1 fotógrafo + 1 videógrafo', 'Ceremonia religiosa y recepción', 'Tomas aéreas', 'Video documental · 10 min', 'Highlight de la fiesta · 15–20 min', 'Todas las fotografías editadas, en digital', 'Álbum 30×30 · 10 hojas (30–45 fotos)', GAL_TXT], ind: 'Individual: Foto 5h $659 · Video 5h $719 · Hora extra $99' },
+      { n: 'Boda Civil', h: '4 horas', p: 439, img: 'anillos-libro', items: ['1 fotógrafo', 'Ceremonia civil', 'Almuerzo o cena', 'Sesión de novios', 'Todas las fotografías editadas, en digital', 'Álbum 20×20 · 15 hojas personalizado (50 fotos)', GAL_TXT], ind: 'Solo fotografía · Si ya contrataste tu plan de boda: $369' }
     ],
     quince: [
-      { n: 'Plata', h: '5 horas', p: 699, img: 'retrato', cubre: ['reel'], items: ['Salón de recepciones', 'Sesión el mismo día del evento', 'Video cinema · 10 min', 'Video fiesta · 20 min', 'Video reel · 1 min', 'Material fotográfico digital', 'Álbum 30×30 · 10 hojas', 'Acceso web con contraseña · 30 días'] },
-      { n: 'Oro', h: '7 horas', p: 965, img: 'novia-ventana', tag: 'Más elegido', cubre: ['reel'], items: ['Sesión en casa de la quinceañera', 'Ceremonia religiosa', 'Salón de recepciones', 'Tomas y vuelo con dron', 'Video cinema · 12 min', 'Video fiesta · 25 min', 'Video reel · 1 min', 'Material fotográfico digital', 'Álbum 30×30 · 15 hojas (70 fotos)', 'Acceso web con contraseña · 30 días'] },
-      { n: 'Diamante', h: '9 horas', p: 1229, img: 'escalera', tag: 'Premium', cubre: ['reel', 'std'], items: ['Sesión Pre-Quince adicional', 'Sesión en casa de la quinceañera', 'Ceremonia religiosa', 'Salón de recepciones', 'Tomas y vuelo con dron', 'Video cinema · 15 min', 'Video fiesta · 40 min', 'Video reel · 1 min', 'Material fotográfico digital', 'Álbum 30×30 · 20 hojas'] }
+      { n: 'Diamante', h: '9 horas', p: 1289, img: 'escalera', star: true, tag: 'Insignia', cubre: ['mirror'], items: ['Arreglo en casa de la quinceañera', 'Ceremonia religiosa y recepción', 'Sesión el mismo día del evento', 'Sesión en El Cajas', '1 hora de Magic Mirror', 'Tomas aéreas', 'Video cinema · 17 min', 'Video fiesta · 35 min', 'Reel de 1 min', 'Todo el material fotográfico, en digital', 'Álbum 30×30 · 20 hojas (90 fotos)', 'Enlace con fotos y videos del Happy Hour', 'Galería web con contraseña · 30 días (opc. 1 año)'], ind: 'Individual: Video 9h $869 · Foto 9h $809 · Hora extra $99' },
+      { n: 'Oro', h: '7 horas', p: 1019, img: 'novia-ventana', tag: 'Más elegido', items: ['Sesión en casa de la quinceañera', 'Ceremonia religiosa y recepción', 'Sesión el mismo día del evento', 'Tomas aéreas', 'Video cinema · 12 min', 'Video fiesta · 25 min', 'Reel de 1 min', 'Todo el material fotográfico, en digital', 'Álbum 30×30 · 15 hojas (70 fotos)', 'Galería web con contraseña · 30 días (opc. 1 año)'], ind: 'Individual: Video 7h $809 · Foto 7h $759 · Hora extra $99' },
+      { n: 'Plata', h: '5 horas', p: 729, img: 'retrato', items: ['Salón de recepciones', 'Sesión el mismo día del evento', 'Video cinema · 10 min', 'Video fiesta · 20 min', 'Reel de 1 min', 'Todo el material fotográfico, en digital', 'Álbum 30×30 · 10 hojas', 'Galería web con contraseña · 30 días (opc. 1 año)'], ind: 'Individual: Video 5h $559 · Foto 5h $499 · Hora extra $99' },
+      { n: 'Bautizos y cumpleaños', h: '4 horas', p: 689, img: 'jardin', items: ['Ceremonia religiosa (opcional)', 'Sesión al homenajeado(a) el mismo día', 'Salón de recepciones', 'Video cinema · 10 min', 'Todo el material fotográfico, en digital', 'Álbum 20×20 (60 fotos)', 'Galería web con contraseña · 30 días (opc. 1 año)'], ind: 'Individual: Video 4h $499 · Foto 4h $439 · Hora extra $79' }
     ],
     destino: [
-      { n: 'Destino Plata', h: '9 horas', p: 1670, suf: '+ viáticos', img: 'paramo', items: ['Arreglo de los novios', 'Ceremonia religiosa', 'Salón de recepciones', 'Post boda el mismo día', 'Tomas y vuelo con dron', 'Video cinema · 15 min', 'Video fiesta · 40 min', 'Video redes · 2 min', 'Material fotográfico digital', 'Álbum 30×30 · 90–120 fotos'] },
-      { n: 'Destino Oro', h: '12 horas', p: 1870, suf: '+ viáticos', img: 'montana', tag: 'Premium', items: ['Llegamos 24h antes a reconocer locaciones', 'Arreglo de los novios', 'Ceremonia religiosa', 'Salón de recepciones', 'Post boda el mismo día', 'Tomas y vuelo con dron', 'Video cinema · 20 min', 'Video fiesta · 45 min', 'Video redes · 3 min', 'Álbum 30×30'] }
+      { n: 'Destino Oro', h: '12 horas', p: 2059, suf: '+ viáticos', img: 'montana', tag: 'Premium', items: ['Llegamos 24h antes a reconocer locaciones', 'Arreglo de los novios', 'Ceremonia religiosa y recepción', 'Postboda el mismo día', 'Tomas aéreas', 'Video cinema · 20 min', 'Video fiesta · 45 min', 'Video para redes · 3 min', 'Todo el material fotográfico, en digital', 'Álbum 30×30 · 25 hojas', 'Galería web con contraseña · 60 días (opc. 1 año)'], ind: 'Los viáticos dependen de la ciudad o país e incluyen costos de producción.' },
+      { n: 'Destino Plata', h: '9 horas', p: 1839, suf: '+ viáticos', img: 'paramo', items: ['Arreglo de los novios', 'Ceremonia religiosa y recepción', 'Postboda el mismo día', 'Tomas aéreas', 'Video cinema · 15 min', 'Video fiesta · 40 min', 'Video para redes · 2 min', 'Todo el material fotográfico, en digital', 'Álbum 30×30 (90–120 fotos)', 'Galería web con contraseña · 30 días (opc. 1 año)'], ind: 'Los viáticos dependen de la ciudad o país e incluyen costos de producción.' }
     ],
     espejo: [
       { n: 'Espejo 1', h: '1 hora', p: 350, img: 'risas', items: ['1 hora de espejo mágico', 'Impresión de fotos ilimitada', 'Diseño personalizado', 'Fotos digitales por enlace'] },
-      { n: 'Espejo 2', h: '2 horas', p: 500, img: 'fiesta', tag: 'Más elegido', items: ['2 horas de espejo mágico', 'Impresión de fotos ilimitada', 'Diseño personalizado', 'Fotos digitales por enlace', 'Álbum de recuerdos con firmas'] },
-      { n: 'Corporativo', h: '3 horas', p: 650, img: 'petalos', items: ['3 horas de espejo mágico', 'Marcos con tu marca', 'Impresión de fotos ilimitada', 'Fotos digitales por enlace'] },
-      { n: 'Video 360', h: '1 hora', p: 220, img: 'fiesta2', items: ['1 hora de máquina video 360', 'Videos por código QR', 'Pistola de burbujas'] }
+      { n: 'Espejo 2', h: '2 horas', p: 500, img: 'fiesta', tag: 'Más elegido', items: ['2 horas de espejo mágico', 'Impresión de fotos ilimitada', 'Diseño personalizado', 'Fotos digitales por enlace', 'Álbum de recuerdos con fotos y firmas'] },
+      { n: 'Corporativo', h: '3 horas', p: 650, img: 'petalos', items: ['3 horas de espejo mágico', 'Marcos de impresión con tu marca', 'Impresión de fotos ilimitada', 'Fotos digitales por enlace'], ind: 'Ya tienes un plan con nosotros: hora adicional de espejo $249' }
     ]
   };
 
   // Arma tu plan: precio por horas (interpola entre puntos; después del último suma "hora")
   const PRECIOS = {
-    boda: { fv: { 5: 949, 7: 1149, 9: 1349 }, foto: { 5: 629, 7: 709, 9: 819 }, video: { 5: 689, 7: 769, 9: 879 }, hora: 99 },
-    quince: { fv: { 5: 699, 7: 965, 9: 1229 }, foto: { 5: 449, 7: 609, 9: 779 }, video: { 5: 489, 7: 659, 9: 829 }, hora: 99 } // foto/video quince: confirmar
+    boda: { fv: { 5: 999, 7: 1199, 8: 1419, 10: 1729 }, foto: { 5: 659, 7: 749, 8: 859, 10: 979 }, video: { 5: 719, 7: 809, 8: 919, 10: 1039 }, hora: 99 },
+    quince: { fv: { 5: 729, 7: 1019, 9: 1289 }, foto: { 5: 499, 7: 759, 9: 809 }, video: { 5: 559, 7: 809, 9: 869 }, hora: 99 }
   };
-  // ⚠️ Los marcados "confirmar" son estimados
   const EXTRAS = [
-    { id: 'drone', n: 'Drone', p: 0, inc: true },
-    { id: 'reel', n: 'Video reel redes · 1 min', p: 80 },   // confirmar
-    { id: 'arreglo', n: 'Arreglo de novios', p: 120 },      // confirmar
-    { id: 'std', n: 'Sesión Pre o Post boda', p: 250 },     // confirmar
-    { id: 'mirror', n: 'Magic Mirror · 1h', p: 350 },
-    { id: '360', n: 'Video 360 · 1h', p: 220 },
-    { id: 'album', n: 'Álbum 30×30 · +5 hojas', p: 90 },    // confirmar
-    { id: 'web', n: 'Acceso web · 1 año', p: 40 }           // confirmar
+    { id: 'aereas', n: 'Tomas aéreas', p: 0, inc: true },
+    { id: 'mirror', n: 'Magic Mirror · 1h', p: 249 },
+    { id: 'std', n: 'Sesión save the date, pre o posboda', p: 269 },
+    { id: 'web', n: 'Web interactiva save the date', p: 129 },
+    { id: 'speech', n: 'Video speech (discursos)', p: 99 },
+    { id: 'express', n: 'Entrega express 72h · fotos + reel', p: 99 },
+    { id: 'galeria', n: 'Galería web · 1 año', p: 99 },
+    { id: 'mini', n: 'Mini álbum para padres', p: 99 },
+    { id: 'deseos', n: 'Video de buenos deseos', p: 129 },
+    { id: 'streaming', n: 'Transmisión en vivo', p: 199 },
+    { id: 'segundo', n: 'Fotógrafo o videógrafo extra', p: 299 }
   ];
 
   const FILMS = [
@@ -272,12 +289,15 @@
     $('#st-name').textContent = p.n; $('#st-meta').innerHTML = `${p.h}<br>$${money(p.p)} ${p.suf || '+ IVA'}`;
   });
   const renderPlans = g => plans.load(PLANES[g], (p, i) => `
-      <li class="p-item" data-i="${i}">
+      <li class="p-item${p.star ? ' star' : ''}" data-i="${i}">
         <div class="p-row"><h3 class="p-name">${p.n}</h3><div class="p-price">$${money(p.p)}<small>${p.suf || '+ IVA'}</small></div></div>
         <div class="p-body">
           <div class="p-meta"><span>${p.h} de cobertura</span>${p.tag ? `<span class="p-tag">${p.tag}</span>` : ''}</div>
           <ul class="p-inc">${p.items.map(t => `<li>${t}</li>`).join('')}</ul>
+          ${p.elige ? `<div class="p-elige"><b>Elige 1 opción</b><ul>${p.elige.map(t => `<li>${t}</li>`).join('')}</ul></div>` : ''}
+          ${p.nota ? `<p class="p-nota">${p.nota}</p>` : ''}
           ${p.ind ? `<p class="p-ind">${p.ind}</p>` : ''}
+          ${p.links ? `<div class="p-links">${p.links.map(([t, u]) => `<a href="${u}" target="_blank" rel="noopener">${t} ↗</a>`).join('')}</div>` : ''}
           <a class="btn btn-k" target="_blank" rel="noopener" href="https://wa.me/${WA}?text=${encodeURIComponent(`Hola MCFILMS, me interesa el plan ${p.n} (${p.h}). ¿Tienen disponible mi fecha?`)}">Reservar ${p.n}</a>
         </div>
       </li>`, PLANES[g].map(p => img(p.img, `Plan ${p.n} MCFILMS`)));
@@ -301,7 +321,7 @@
       </li>`, TEAM.map(m => `<img src="assets/img/${m.img}.webp" alt="${m.n}, ${m.r} en MCFILMS" loading="lazy" decoding="async">`));
 
   /* ═════════ ARMA TU PLAN ═════════ */
-  const stt = { evento: 'boda', servicio: 'fv', horas: 7, extras: new Set(['drone']) };
+  const stt = { evento: 'boda', servicio: 'fv', horas: 7, extras: new Set(['aereas']) };
   const extrasEl = $('#extras');
   extrasEl.innerHTML = EXTRAS.map(x => `
     <button class="opt extra${x.inc ? ' on' : ''}" data-id="${x.id}" ${x.inc ? 'disabled' : ''}>
@@ -333,7 +353,7 @@
     const tip = $('#sum-tip'), grupo = stt.evento === 'boda' ? PLANES.bodas : PLANES.quince;
     const pagados = ex.filter(x => !x.inc).map(x => x.id);
     const mejor = stt.servicio === 'fv' && pagados.length > 0 && [...grupo].sort((a, b) => a.p - b.p).find(p => parseInt(p.h) >= stt.horas && p.p < total &&
-      pagados.every(id => (p.cubre || []).includes(id)));
+      pagados.every(id => (p.cubre || []).includes(id) || (p.eligeIds || []).includes(id)) && pagados.filter(id => (p.eligeIds || []).includes(id)).length <= 1);
     tip.classList.toggle('show', !!mejor);
     if (mejor) tip.innerHTML = `El <b>Plan ${mejor.n}</b> (${mejor.h}) ya incluye lo que elegiste por $${money(mejor.p)}. Ahorras $${money(total - mejor.p)}. <a href="#planes">Ver plan</a>`;
     const msg = `Hola MCFILMS, armé mi plan en la web:\n• ${labels[stt.evento]} · ${labels[stt.servicio]} · ${stt.horas} horas\n${ex.filter(x => !x.inc).map(x => `• ${x.n}`).join('\n')}\nTotal estimado: $${money(total)} + IVA\n¿Tienen disponible mi fecha?`;
