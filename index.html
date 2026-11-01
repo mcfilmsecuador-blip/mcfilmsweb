@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/img/lago-s.webp" imagesrcset="assets/img/lago-s.webp 1100w, assets/img/lago.webp 2400w" imagesizes="100vw" fetchpriority="high">
-<link rel="stylesheet" href="assets/styles.css?v=1793600000">
+<link rel="stylesheet" href="assets/styles.css?v=1793610000">
 
 <script type="application/ld+json">
 {
@@ -74,6 +74,8 @@
       "@type": "FAQPage",
       "mainEntity": [
         {"@type": "Question", "name": "¿Cuánto cuesta la fotografía y video de una boda en Ecuador con MCFILMS?", "acceptedAnswer": {"@type": "Answer", "text": "Nuestros planes de foto y video para bodas van desde $999 + IVA (5 horas, Plan Bronce) hasta $2,349 + IVA (12 horas, Plan Deluxe, con equipo doble y web save the date). La boda civil cuesta $439 + IVA. También puedes armar tu propio plan en nuestra web."}},
+        {"@type": "Question", "name": "¿Cuál es la forma de pago?", "acceptedAnswer": {"@type": "Answer", "text": "50% al firmar el contrato y 50% una semana antes del evento, por transferencia bancaria o con tarjeta de crédito (7% adicional)."}},
+        {"@type": "Question", "name": "¿Cuánto tardan en entregar el material final?", "acceptedAnswer": {"@type": "Answer", "text": "30 días laborables después del evento. Las cinematografías se entregan en 4K."}},
         {"@type": "Question", "name": "¿Trabajan fuera de Cuenca?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. Tenemos base en Cuenca y cubrimos bodas en Quito, Guayaquil, Loja, Manta y todo el Ecuador, además de bodas destino."}},
         {"@type": "Question", "name": "¿Con cuánta anticipación debo reservar mi fecha?", "acceptedAnswer": {"@type": "Answer", "text": "Recomendamos reservar entre 6 y 12 meses antes, sobre todo para fechas en temporada alta. Escríbenos por WhatsApp para confirmar disponibilidad."}},
         {"@type": "Question", "name": "¿Incluyen tomas aéreas en las bodas?", "acceptedAnswer": {"@type": "Answer", "text": "Sí, todos nuestros planes de boda con video incluyen tomas aéreas."}},
@@ -262,21 +264,21 @@
       <div>
         <span class="eyebrow rv">Arma tu plan</span>
         <h2 class="d d-l split"><span class="ln"><span>A tu medida</span></span></h2>
-        <p class="lead rv d1">Elige lo que necesitas y mira tu inversión al instante. Al final te lo enviamos por WhatsApp o correo.</p>
+        <p class="lead rv d1">Elige cada momento, tu equipo y todo lo que quieres recibir, y mira tu inversión al instante. Al final te lo enviamos por WhatsApp o correo.</p>
       </div>
     </div>
 
     <div class="builder">
       <div class="b-card rv">
         <div class="b-step">
-          <div class="b-label"><b>01 · ¿Qué celebras?</b><span>Paso 1 de 4</span></div>
+          <div class="b-label"><b>01 · ¿Qué celebras?</b><span>Paso 1 de 7</span></div>
           <div class="seg" style="--c:2" data-k="evento">
             <button class="opt on" data-v="boda"><b>Boda</b><small>Civil, religiosa o destino</small></button>
             <button class="opt" data-v="quince"><b>Quinceaños</b><small>Sesión + fiesta</small></button>
           </div>
         </div>
         <div class="b-step">
-          <div class="b-label"><b>02 · Servicio</b><span>Paso 2 de 4</span></div>
+          <div class="b-label"><b>02 · Servicio</b><span>Paso 2 de 7</span></div>
           <div class="seg" style="--c:3" data-k="servicio">
             <button class="opt on" data-v="fv"><b>Foto + Video</b><small>La experiencia completa</small></button>
             <button class="opt" data-v="foto"><b>Solo foto</b><small>Fotografía artística</small></button>
@@ -284,16 +286,13 @@
           </div>
         </div>
         <div class="b-step">
-          <div class="b-label"><b>03 · Horas de cobertura</b><span>Paso 3 de 4</span></div>
+          <div class="b-label"><b>03 · Horas de cobertura</b><span>Paso 3 de 7</span></div>
           <div class="range-wrap">
             <div class="range-val"><span id="hrs-v">7</span><small>H</small></div>
             <input type="range" id="hrs" min="5" max="12" step="1" value="7" aria-label="Horas de cobertura">
           </div>
         </div>
-        <div class="b-step">
-          <div class="b-label"><b>04 · Extras</b><span>Paso 4 de 4</span></div>
-          <div class="extras" id="extras"></div>
-        </div>
+        <div id="b-dyn"></div>
       </div>
 
       <button class="mini" id="mini" aria-label="Ver resumen de tu plan"><span>Tu plan</span><b id="mini-total">$0</b><span>Ver</span></button>
@@ -306,7 +305,7 @@
           <a class="btn btn-y" id="send-wa" href="#" target="_blank" rel="noopener">Enviar por WhatsApp</a>
           <a class="btn btn-l" id="send-mail" href="#contacto">Recibir por correo</a>
         </div>
-        <p class="sum-note">Valor referencial. Confirmamos disponibilidad y precio final contigo.</p>
+        <p class="sum-note">Valor referencial de un plan a tu medida. Nuestros planes armados salen más convenientes. Confirmamos disponibilidad y precio final contigo.</p>
       </aside>
     </div>
   </div>
@@ -331,9 +330,9 @@
         <div class="demo-pic"><img src="assets/img/anillos-flores-s.webp" alt="Anillos y flores, plantillas de invitación MCFILMS" loading="lazy" decoding="async"><span class="demo-tag">14 plantillas</span></div>
         <div class="demo-txt"><small>Plantillas</small><h3>Elige tu diseño</h3><p>Recorre cada plantilla completa o pide un diseño propio. Cada invitado recibe su link con su nombre.</p><span class="demo-go">Ver las plantillas ↗</span></div>
       </a>
-      <a class="demo rv d2" href="https://mcfilmsecuador.com/gallery/jennifer-brian-save-the-date-pf1i" target="_blank" rel="noopener">
+      <a class="demo rv d2" href="https://mcfilmsecuador.com/gallery/juan-sydney-q8m3" target="_blank" rel="noopener">
         <div class="demo-pic"><img src="assets/img/lago-s.webp" alt="Novios junto al lago, galería privada MCFILMS" loading="lazy" decoding="async"><span class="demo-tag">En todos los planes</span></div>
-        <div class="demo-txt"><small>McFilms Gallery</small><h3>Tu galería privada</h3><p>Todas tus fotos editadas y tus películas en un solo lugar, para ver, descargar y elegir las fotos de tu álbum.</p><span class="demo-go">Abrir la galería ↗</span></div>
+        <div class="demo-txt"><small>McFilms Gallery</small><h3>Una galería de boda real</h3><p>La boda completa de Juan &amp; Sydney: preparativos, ceremonia, recepción, posboda y sus películas, tal como la reciben nuestros novios.</p><span class="demo-go">Abrir la galería ↗</span></div>
       </a>
     </div>
     <p class="plans-note">Web save the date: incluida en Deluxe · $99 en Diamante · $129 en Oro, Plata y Bronce · $149 sin plan.</p>
@@ -344,7 +343,7 @@
 <section class="panel sec" id="nosotros">
   <div class="wrap">
     <div class="about">
-      <div class="about-pic clip"><img src="assets/img/amigos-s.webp" alt="Novio y amigos riendo antes de la boda" loading="lazy"></div>
+      <div class="about-pic clip"><img src="assets/img/hermanos.webp" alt="José Andrés y Javier Mercado, hermanos y fundadores de MCFILMS" loading="lazy"></div>
       <div>
         <span class="eyebrow rv">Nosotros</span>
         <h2 class="d d-l split" style="margin-top:18px"><span class="ln"><span>Dos hermanos,</span></span><span class="ln"><span>una obsesión</span></span></h2>
@@ -494,10 +493,16 @@
     <div class="faq rv">
       <details><summary>¿Cuánto cuesta la fotografía y video de una boda?</summary><p>Nuestros planes de foto y video para bodas van desde $999 + IVA (5 horas, Plan Bronce) hasta $2,349 + IVA (12 horas, Plan Deluxe). La boda civil cuesta $439 + IVA. También puedes armar tu propio plan y ver el valor al instante.</p></details>
       <details><summary>¿Trabajan fuera de Cuenca?</summary><p>Sí. Tenemos base en Cuenca y cubrimos bodas en Quito, Guayaquil, Loja, Manta y todo el Ecuador, además de bodas destino.</p></details>
+      <details><summary>¿Cuál es la forma de pago?</summary><p>50% al firmar el contrato y 50% una semana antes del evento. Puedes pagar por transferencia bancaria o con tarjeta de crédito (con un 7% adicional).</p></details>
+      <details><summary>¿Cuántas personas van del equipo?</summary><p>Depende del plan que elijas: Bronce y Plata, 1 fotógrafo y 1 videógrafo; Oro y Diamante, 1 fotógrafo y 2 videógrafos; Deluxe, 2 fotógrafos y 2 videógrafos.</p></details>
+      <details><summary>¿En qué formato entregan los videos?</summary><p>Las cinematografías se entregan en 4K.</p></details>
+      <details><summary>¿Cuánto tardan en entregar el material final?</summary><p>30 días laborables después del evento. Con la entrega express (incluida en Deluxe) recibes un adelanto de fotos y un reel en 72 horas.</p></details>
+      <details><summary>¿Cómo elijo las fotos de mi álbum?</summary><p>Dentro de tu galería hay un seleccionador: marcas las fotos que quieres en el álbum y la selección nos llega directamente. Te enviamos las instrucciones junto con el link.</p></details>
+      <details><summary>¿Cómo retiro mi álbum?</summary><p>Cuando tu álbum esté listo te avisamos. Puedes retirarlo en nuestra oficina (Av. Ordóñez Lasso 728 y Guayacán, Edif. Astudillo, Oficina 1, Cuenca) o enviar a alguien de tu confianza.</p></details>
       <details><summary>¿Con cuánta anticipación debo reservar?</summary><p>Recomendamos reservar entre 6 y 12 meses antes, sobre todo en temporada alta. Escríbenos por WhatsApp para confirmar tu fecha.</p></details>
       <details><summary>¿Incluyen tomas aéreas?</summary><p>Sí, todos nuestros planes de boda con video incluyen tomas aéreas.</p></details>
       <details><summary>¿Qué es la web save the date?</summary><p>Una invitación web con tu foto y video, RSVP, el nombre de cada invitado y versión en español e inglés. Viene incluida en el Plan Deluxe; en Diamante cuesta $99 y en los demás planes $129. <a href="https://mcfilmsecuador.com/bodas/plantillas" target="_blank" rel="noopener">Mira las plantillas</a>.</p></details>
-      <details><summary>¿Cómo recibo mis fotos y videos?</summary><p>En tu galería web privada McFilms Gallery: todas las fotografías editadas, tus películas y la selección de fotos para tu álbum. Dura 60 días (1 año por $99; incluido en Deluxe). <a href="https://mcfilmsecuador.com/gallery/jennifer-brian-save-the-date-pf1i" target="_blank" rel="noopener">Mira una galería de ejemplo</a>.</p></details>
+      <details><summary>¿Cómo recibo mis fotos y videos?</summary><p>Te enviamos el link de tu galería web privada McFilms Gallery con todas las fotografías editadas, tus películas y las instrucciones para elegir las fotos de tu álbum. Dura 60 días (1 año por $99; incluido en Deluxe). <a href="https://mcfilmsecuador.com/gallery/juan-sydney-q8m3" target="_blank" rel="noopener">Mira una galería de ejemplo</a>.</p></details>
     </div>
   </div>
 </section>
@@ -599,7 +604,7 @@
 </div>
 
 <script src="assets/vendor/lenis.min.js" defer></script>
-<script src="assets/app.js?v=1793600000" defer></script>
+<script src="assets/app.js?v=1793610000" defer></script>
 <script src="assets/galeria-publica.js?v=2" defer></script>
 </body>
 </html>
