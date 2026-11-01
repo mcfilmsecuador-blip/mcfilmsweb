@@ -188,7 +188,7 @@
     if (i === activeFilm) return; activeFilm = i;
     films.forEach((f, k) => {
       const v = $('video', f); f.classList.toggle('on', k === i);
-      if (k === i) v.play().catch(() => {}); else v.pause();
+      if (k === i && !lowData) v.play().catch(() => {}); else v.pause();
     });
   };
   films.forEach(f => {
