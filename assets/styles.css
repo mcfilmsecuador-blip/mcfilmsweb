@@ -343,6 +343,8 @@ input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 
 .extra.on .ck svg { opacity: 1; }
 .extra .pr { margin-left: auto; font-size: 14px; color: var(--ink2); white-space: nowrap; }
 .b-hint { font-size: 13px; color: var(--ink3); margin: -8px 0 14px; }
+.extra.off { opacity: .45; }
+.sum-warn span { color: var(--y); }
 .b-sub { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink2); margin: 22px 0 10px; }
 .seg-album { grid-template-columns: repeat(6, 1fr); }
 .seg-album .opt { padding: 12px 10px; text-align: center; }
